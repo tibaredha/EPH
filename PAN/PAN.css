@@ -1,0 +1,66 @@
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+body { 
+  background-color: #c7c7c7;
+  background-image: url(fond.png);
+  background-repeat: repeat;
+  font-family: PT Sans Caption, Verdana, Arial, Helvetica, sans-serif;
+}
+#content .sub-content .content {
+  width: 100%;
+  position: relative;
+  padding-top : 20px;
+  left : 20px;
+}
+#content .sub-content .content .container .panier{
+  -moz-border-radius: 5px; 
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  width : 900px;
+  min-height : 200px;
+  margin : 0 auto;
+  background: white;
+  padding : 20px;
+}
+#content .sub-content .content .container .panier .prod_panier table{
+  width : 100%;
+}
+#content .sub-content .content .container .panier .prod_panier table td{
+  color : black;
+  text-align: center;
+  padding : 5px;
+  border-bottom: 1px solid rgba(49,199,24, 0.4);
+}
+#content .sub-content .content .container .panier .prod_panier table th{
+  font-weight: bold;
+  border-bottom: 5px solid rgba(49,199,24, 0.9);
+  padding : 10px;
+  color : black;
+  text-align: center;
+}
+#content .sub-content .content .container .panier .panier_total{
+  min-width : 300px;
+  min-height : 50px;
+  margin-right : 0;
+  margin-top : 20px;
+}
+

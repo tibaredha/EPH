@@ -1,0 +1,3197 @@
+// JavaScript Document
+ <!-- Calendrier de grossesse créé par Dr Aly Abbara, http://www.aly-abbara.com -->
+ <!-- le fonctionnement du calendrier est assuré par les calculs du jour julien et ses conversions selon des formules extraites des publications de la société astronomique de France -->
+ w = self;
+function calculjourjulien(form) {
+    MM=(form.nmois.value=="")? "0" : eval(form.nmois.value);
+    DD=(form.njour.value=="")? "0": eval(form.njour.value);
+    YY=(form.nannee.value=="") ? "0" :eval(form.nannee.value);
+   if ((form.nmois.value < 1) || (form.nmois.value > 12) || (form.njour.value < 1) || (form.njour.value > 31) || (form.nmois.value == "") || (form.njour.value == "") || (form.nannee.value == "")) {
+      MM = "Invalid"}
+   if (((form.nmois.value == 4) || (form.nmois.value == 6) || (form.nmois.value == 9) || (form.nmois.value == 11)) && (form.njour.value > 30)) {
+      MM = "Invalid"}
+   if (((form.nmois.value == 4) || (form.nmois.value == 6) || (form.nmois.value == 9) || (form.nmois.value == 11)) && (form.njour.value > 30)) {
+      form.njour.value = "Invalid"}
+   if (form.nmois.value > 12) {
+      form.nmois.value = "Invalid"}
+   if (((form.nmois.value == 2)) && (form.njour.value > 29)) {
+      MM = "Invalid"}
+   if (((form.nmois.value == 2)) && (form.njour.value > 29)) {
+      form.nmois.value = "Invalid"}
+	if ((form.nmois.value == 2) && (form.nannee.value/4) != Math.floor(form.nannee.value/4) && (DD > 28)) {	
+      form.nmois.value = "Invalid"}
+    with (Math) {  
+      GGG = 1;
+      if( YY < 1582 ) GGG = 0;
+      if( YY <= 1582 && MM < 10 ) GGG = 0;
+      if( YY <= 1582 && MM == 10 && DD < 5 ) GGG = 0;
+      JD = -1 * floor(7 * (floor((MM + 9) / 12) + YY) / 4);
+      S = 1;
+      if ((MM - 9)<0) S=-1;
+      A = abs(MM - 9);
+      J1 = floor(YY + S * floor(A / 7));
+      J1 = -1 * floor((floor(J1 / 100) + 1) * 3 / 4);
+      JD = JD + floor(275 * MM / 9) + DD + (GGG * J1);
+      JD = JD + 1721027 + 2 * GGG + 367 * YY - 0.5;
+	  K1 = (JD + 1.5);
+	  K2 = (K1/7);
+	  K3 = K2 - floor(K2);
+	  JS = round(K3*7 + 0.000000000317);
+	  }  
+	  form.jsemaine.value = JS   
+   if (form.jsemaine.value == 0) {
+      form.jsemaine.value = "dimanche"} else
+   if (form.jsemaine.value == 1) {
+      form.jsemaine.value = "lundi"} else
+   if (form.jsemaine.value == 2) {
+      form.jsemaine.value = "mardi"} else
+   if (form.jsemaine.value == 3) {
+      form.jsemaine.value = "mercredi"} else
+   if (form.jsemaine.value == 4) {
+      form.jsemaine.value = "jeudi"} else
+   if (form.jsemaine.value == 5) {
+      form.jsemaine.value = "vendredi"} else
+   if (form.jsemaine.value == 6) {
+      form.jsemaine.value = "samedi"}
+}
+
+function conversionjourjulien(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+7.5);
+   F = JD+7.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois2.value =  MM;
+    form.njour2.value   =  JJ;
+    form.nannee2.value  =  AA;
+   if (form.nmois2.value == 1) {
+      form.nmois2.value = "janvier"}
+   if (form.nmois2.value == 2) {
+      form.nmois2.value = "février"}
+   if (form.nmois2.value == 3) {
+      form.nmois2.value = "mars"}
+   if (form.nmois2.value == 4) {
+      form.nmois2.value = "avril"}
+   if (form.nmois2.value == 5) {
+      form.nmois2.value = "mai"}
+   if (form.nmois2.value == 6) {
+      form.nmois2.value = "juin"}
+   if (form.nmois2.value == 7) {
+      form.nmois2.value = "juillet"}
+   if (form.nmois2.value == 8) {
+      form.nmois2.value = "août"}
+   if (form.nmois2.value == 9) {
+      form.nmois2.value = "septembre"}
+   if (form.nmois2.value == 10) {
+      form.nmois2.value = "octobre"}
+   if (form.nmois2.value == 11) {
+      form.nmois2.value = "novembre"}
+   if (form.nmois2.value == 12) {
+      form.nmois2.value = "décembre"}
+}
+function conversionjourjulien2(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+14.5);
+   F = JD+14.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois3.value =  MM;
+    form.njour3.value   =  JJ;
+    form.nannee3.value  =  AA;
+   if (form.nmois3.value == 1) {
+      form.nmois3.value = "janvier"}
+   if (form.nmois3.value == 2) {
+      form.nmois3.value = "février"}
+   if (form.nmois3.value == 3) {
+      form.nmois3.value = "mars"}
+   if (form.nmois3.value == 4) {
+      form.nmois3.value = "avril"}
+   if (form.nmois3.value == 5) {
+      form.nmois3.value = "mai"}
+   if (form.nmois3.value == 6) {
+      form.nmois3.value = "juin"}
+   if (form.nmois3.value == 7) {
+      form.nmois3.value = "juillet"}
+   if (form.nmois3.value == 8) {
+      form.nmois3.value = "août"}
+   if (form.nmois3.value == 9) {
+      form.nmois3.value = "septembre"}
+   if (form.nmois3.value == 10) {
+      form.nmois3.value = "octobre"}
+   if (form.nmois3.value == 11) {
+      form.nmois3.value = "novembre"}
+   if (form.nmois3.value == 12) {
+      form.nmois3.value = "décembre"}
+}
+function conversionjourjulien3(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+21.5);
+   F = JD+21.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois4.value =  MM;
+    form.njour4.value   =  JJ;
+    form.nannee4.value  =  AA;
+   if (form.nmois4.value == 1) {
+      form.nmois4.value = "janvier"}
+   if (form.nmois4.value == 2) {
+      form.nmois4.value = "février"}
+   if (form.nmois4.value == 3) {
+      form.nmois4.value = "mars"}
+   if (form.nmois4.value == 4) {
+      form.nmois4.value = "avril"}
+   if (form.nmois4.value == 5) {
+      form.nmois4.value = "mai"}
+   if (form.nmois4.value == 6) {
+      form.nmois4.value = "juin"}
+   if (form.nmois4.value == 7) {
+      form.nmois4.value = "juillet"}
+   if (form.nmois4.value == 8) {
+      form.nmois4.value = "août"}
+   if (form.nmois4.value == 9) {
+      form.nmois4.value = "septembre"}
+   if (form.nmois4.value == 10) {
+      form.nmois4.value = "octobre"}
+   if (form.nmois4.value == 11) {
+      form.nmois4.value = "novembre"}
+   if (form.nmois4.value == 12) {
+      form.nmois4.value = "décembre"}
+
+}
+function conversionjourjulien4(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+28.5);
+   F = JD+28.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois5.value =  MM;
+    form.njour5.value   =  JJ;
+    form.nannee5.value  =  AA;
+   if (form.nmois5.value == 1) {
+      form.nmois5.value = "janvier"}
+   if (form.nmois5.value == 2) {
+      form.nmois5.value = "février"}
+   if (form.nmois5.value == 3) {
+      form.nmois5.value = "mars"}
+   if (form.nmois5.value == 4) {
+      form.nmois5.value = "avril"}
+   if (form.nmois5.value == 5) {
+      form.nmois5.value = "mai"}
+   if (form.nmois5.value == 6) {
+      form.nmois5.value = "juin"}
+   if (form.nmois5.value == 7) {
+      form.nmois5.value = "juillet"}
+   if (form.nmois5.value == 8) {
+      form.nmois5.value = "août"}
+   if (form.nmois5.value == 9) {
+      form.nmois5.value = "septembre"}
+   if (form.nmois5.value == 10) {
+      form.nmois5.value = "octobre"}
+   if (form.nmois5.value == 11) {
+      form.nmois5.value = "novembre"}
+   if (form.nmois5.value == 12) {
+      form.nmois5.value = "décembre"}
+}
+function conversionjourjulien5(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+35.5);
+   F = JD+35.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois6.value =  MM;
+    form.njour6.value   =  JJ;
+    form.nannee6.value  =  AA;
+   if (form.nmois6.value == 1) {
+      form.nmois6.value = "janvier"}
+   if (form.nmois6.value == 2) {
+      form.nmois6.value = "février"}
+   if (form.nmois6.value == 3) {
+      form.nmois6.value = "mars"}
+   if (form.nmois6.value == 4) {
+      form.nmois6.value = "avril"}
+   if (form.nmois6.value == 5) {
+      form.nmois6.value = "mai"}
+   if (form.nmois6.value == 6) {
+      form.nmois6.value = "juin"}
+   if (form.nmois6.value == 7) {
+      form.nmois6.value = "juillet"}
+   if (form.nmois6.value == 8) {
+      form.nmois6.value = "août"}
+   if (form.nmois6.value == 9) {
+      form.nmois6.value = "septembre"}
+   if (form.nmois6.value == 10) {
+      form.nmois6.value = "octobre"}
+   if (form.nmois6.value == 11) {
+      form.nmois6.value = "novembre"}
+   if (form.nmois6.value == 12) {
+      form.nmois6.value = "décembre"}
+}
+function conversionjourjulien6(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+42.5);
+   F = JD+42.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois7.value =  MM;
+    form.njour7.value   =  JJ;
+    form.nannee7.value  =  AA;
+   if (form.nmois7.value == 1) {
+      form.nmois7.value = "janvier"}
+   if (form.nmois7.value == 2) {
+      form.nmois7.value = "février"}
+   if (form.nmois7.value == 3) {
+      form.nmois7.value = "mars"}
+   if (form.nmois7.value == 4) {
+      form.nmois7.value = "avril"}
+   if (form.nmois7.value == 5) {
+      form.nmois7.value = "mai"}
+   if (form.nmois7.value == 6) {
+      form.nmois7.value = "juin"}
+   if (form.nmois7.value == 7) {
+      form.nmois7.value = "juillet"}
+   if (form.nmois7.value == 8) {
+      form.nmois7.value = "août"}
+   if (form.nmois7.value == 9) {
+      form.nmois7.value = "septembre"}
+   if (form.nmois7.value == 10) {
+      form.nmois7.value = "octobre"}
+   if (form.nmois7.value == 11) {
+      form.nmois7.value = "novembre"}
+   if (form.nmois7.value == 12) {
+      form.nmois7.value = "décembre"}
+}
+function conversionjourjulien7(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+49.5);
+   F = JD+49.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois8.value =  MM;
+    form.njour8.value   =  JJ;
+    form.nannee8.value  =  AA;
+   if (form.nmois8.value == 1) {
+      form.nmois8.value = "janvier"}
+   if (form.nmois8.value == 2) {
+      form.nmois8.value = "février"}
+   if (form.nmois8.value == 3) {
+      form.nmois8.value = "mars"}
+   if (form.nmois8.value == 4) {
+      form.nmois8.value = "avril"}
+   if (form.nmois8.value == 5) {
+      form.nmois8.value = "mai"}
+   if (form.nmois8.value == 6) {
+      form.nmois8.value = "juin"}
+   if (form.nmois8.value == 7) {
+      form.nmois8.value = "juillet"}
+   if (form.nmois8.value == 8) {
+      form.nmois8.value = "août"}
+   if (form.nmois8.value == 9) {
+      form.nmois8.value = "septembre"}
+   if (form.nmois8.value == 10) {
+      form.nmois8.value = "octobre"}
+   if (form.nmois8.value == 11) {
+      form.nmois8.value = "novembre"}
+   if (form.nmois8.value == 12) {
+      form.nmois8.value = "décembre"}
+}
+function conversionjourjulien8(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+56.5);
+   F = JD+56.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois9.value =  MM;
+    form.njour9.value   =  JJ;
+    form.nannee9.value  =  AA;
+   if (form.nmois9.value == 1) {
+      form.nmois9.value = "janvier"}
+   if (form.nmois9.value == 2) {
+      form.nmois9.value = "février"}
+   if (form.nmois9.value == 3) {
+      form.nmois9.value = "mars"}
+   if (form.nmois9.value == 4) {
+      form.nmois9.value = "avril"}
+   if (form.nmois9.value == 5) {
+      form.nmois9.value = "mai"}
+   if (form.nmois9.value == 6) {
+      form.nmois9.value = "juin"}
+   if (form.nmois9.value == 7) {
+      form.nmois9.value = "juillet"}
+   if (form.nmois9.value == 8) {
+      form.nmois9.value = "août"}
+   if (form.nmois9.value == 9) {
+      form.nmois9.value = "septembre"}
+   if (form.nmois9.value == 10) {
+      form.nmois9.value = "octobre"}
+   if (form.nmois9.value == 11) {
+      form.nmois9.value = "novembre"}
+   if (form.nmois9.value == 12) {
+      form.nmois9.value = "décembre"}
+}
+function conversionjourjulien9(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+63.5);
+   F = JD+63.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois10.value =  MM;
+    form.njour10.value   =  JJ;
+    form.nannee10.value  =  AA;
+   if (form.nmois10.value == 1) {
+      form.nmois10.value = "janvier"}
+   if (form.nmois10.value == 2) {
+      form.nmois10.value = "février"}
+   if (form.nmois10.value == 3) {
+      form.nmois10.value = "mars"}
+   if (form.nmois10.value == 4) {
+      form.nmois10.value = "avril"}
+   if (form.nmois10.value == 5) {
+      form.nmois10.value = "mai"}
+   if (form.nmois10.value == 6) {
+      form.nmois10.value = "juin"}
+   if (form.nmois10.value == 7) {
+      form.nmois10.value = "juillet"}
+   if (form.nmois10.value == 8) {
+      form.nmois10.value = "août"}
+   if (form.nmois10.value == 9) {
+      form.nmois10.value = "septembre"}
+   if (form.nmois10.value == 10) {
+      form.nmois10.value = "octobre"}
+   if (form.nmois10.value == 11) {
+      form.nmois10.value = "novembre"}
+   if (form.nmois10.value == 12) {
+      form.nmois10.value = "décembre"}
+}
+function conversionjourjulien10(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+70.5);
+   F = JD+70.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T + F);
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois11.value =  MM;
+    form.njour11.value   =  JJ;
+    form.nannee11.value  =  AA;
+   if (form.nmois11.value == 1) {
+      form.nmois11.value = "janvier"}
+   if (form.nmois11.value == 2) {
+      form.nmois11.value = "février"}
+   if (form.nmois11.value == 3) {
+      form.nmois11.value = "mars"}
+   if (form.nmois11.value == 4) {
+      form.nmois11.value = "avril"}
+   if (form.nmois11.value == 5) {
+      form.nmois11.value = "mai"}
+   if (form.nmois11.value == 6) {
+      form.nmois11.value = "juin"}
+   if (form.nmois11.value == 7) {
+      form.nmois11.value = "juillet"}
+   if (form.nmois11.value == 8) {
+      form.nmois11.value = "août"}
+   if (form.nmois11.value == 9) {
+      form.nmois11.value = "septembre"}
+   if (form.nmois11.value == 10) {
+      form.nmois11.value = "octobre"}
+   if (form.nmois11.value == 11) {
+      form.nmois11.value = "novembre"}
+   if (form.nmois11.value == 12) {
+      form.nmois11.value = "décembre"}
+}	
+function conversionjourjulien11(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+77.5);
+   F = JD+77.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois12.value =  MM;
+    form.njour12.value   =  JJ;
+    form.nannee12.value  =  AA;
+   if (form.nmois12.value == 1) {
+      form.nmois12.value = "janvier"}
+   if (form.nmois12.value == 2) {
+      form.nmois12.value = "février"}
+   if (form.nmois12.value == 3) {
+      form.nmois12.value = "mars"}
+   if (form.nmois12.value == 4) {
+      form.nmois12.value = "avril"}
+   if (form.nmois12.value == 5) {
+      form.nmois12.value = "mai"}
+   if (form.nmois12.value == 6) {
+      form.nmois12.value = "juin"}
+   if (form.nmois12.value == 7) {
+      form.nmois12.value = "juillet"}
+   if (form.nmois12.value == 8) {
+      form.nmois12.value = "août"}
+   if (form.nmois12.value == 9) {
+      form.nmois12.value = "septembre"}
+   if (form.nmois12.value == 10) {
+      form.nmois12.value = "octobre"}
+   if (form.nmois12.value == 11) {
+      form.nmois12.value = "novembre"}
+   if (form.nmois12.value == 12) {
+      form.nmois12.value = "décembre"}
+}
+function conversionjourjulien12(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+84.5);
+   F = JD+84.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois13.value =  MM;
+    form.njour13.value   =  JJ;
+    form.nannee13.value  =  AA;
+   if (form.nmois13.value == 1) {
+      form.nmois13.value = "janvier"}
+   if (form.nmois13.value == 2) {
+      form.nmois13.value = "février"}
+   if (form.nmois13.value == 3) {
+      form.nmois13.value = "mars"}
+   if (form.nmois13.value == 4) {
+      form.nmois13.value = "avril"}
+   if (form.nmois13.value == 5) {
+      form.nmois13.value = "mai"}
+   if (form.nmois13.value == 6) {
+      form.nmois13.value = "juin"}
+   if (form.nmois13.value == 7) {
+      form.nmois13.value = "juillet"}
+   if (form.nmois13.value == 8) {
+      form.nmois13.value = "août"}
+   if (form.nmois13.value == 9) {
+      form.nmois13.value = "septembre"}
+   if (form.nmois13.value == 10) {
+      form.nmois13.value = "octobre"}
+   if (form.nmois13.value == 11) {
+      form.nmois13.value = "novembre"}
+   if (form.nmois13.value == 12) {
+      form.nmois13.value = "décembre"}
+}
+function conversionjourjulien13(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+91.5);
+   F = JD+91.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois14.value =  MM;
+    form.njour14.value   =  JJ;
+    form.nannee14.value  =  AA;
+   if (form.nmois14.value == 1) {
+      form.nmois14.value = "janvier"}
+   if (form.nmois14.value == 2) {
+      form.nmois14.value = "février"}
+   if (form.nmois14.value == 3) {
+      form.nmois14.value = "mars"}
+   if (form.nmois14.value == 4) {
+      form.nmois14.value = "avril"}
+   if (form.nmois14.value == 5) {
+      form.nmois14.value = "mai"}
+   if (form.nmois14.value == 6) {
+      form.nmois14.value = "juin"}
+   if (form.nmois14.value == 7) {
+      form.nmois14.value = "juillet"}
+   if (form.nmois14.value == 8) {
+      form.nmois14.value = "août"}
+   if (form.nmois14.value == 9) {
+      form.nmois14.value = "septembre"}
+   if (form.nmois14.value == 10) {
+      form.nmois14.value = "octobre"}
+   if (form.nmois14.value == 11) {
+      form.nmois14.value = "novembre"}
+   if (form.nmois14.value == 12) {
+      form.nmois14.value = "décembre"}
+}
+function conversionjourjulien14(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+98.5);
+   F = JD+98.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois15.value =  MM;
+    form.njour15.value   =  JJ;
+    form.nannee15.value  =  AA;
+   if (form.nmois15.value == 1) {
+      form.nmois15.value = "janvier"}
+   if (form.nmois15.value == 2) {
+      form.nmois15.value = "février"}
+   if (form.nmois15.value == 3) {
+      form.nmois15.value = "mars"}
+   if (form.nmois15.value == 4) {
+      form.nmois15.value = "avril"}
+   if (form.nmois15.value == 5) {
+      form.nmois15.value = "mai"}
+   if (form.nmois15.value == 6) {
+      form.nmois15.value = "juin"}
+   if (form.nmois15.value == 7) {
+      form.nmois15.value = "juillet"}
+   if (form.nmois15.value == 8) {
+      form.nmois15.value = "août"}
+   if (form.nmois15.value == 9) {
+      form.nmois15.value = "septembre"}
+   if (form.nmois15.value == 10) {
+      form.nmois15.value = "octobre"}
+   if (form.nmois15.value == 11) {
+      form.nmois15.value = "novembre"}
+   if (form.nmois15.value == 12) {
+      form.nmois15.value = "décembre"}
+}
+function conversionjourjulien15(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+105.5);
+   F = JD+105.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois16.value =  MM;
+    form.njour16.value   =  JJ;
+    form.nannee16.value  =  AA;
+   if (form.nmois16.value == 1) {
+      form.nmois16.value = "janvier"}
+   if (form.nmois16.value == 2) {
+      form.nmois16.value = "février"}
+   if (form.nmois16.value == 3) {
+      form.nmois16.value = "mars"}
+   if (form.nmois16.value == 4) {
+      form.nmois16.value = "avril"}
+   if (form.nmois16.value == 5) {
+      form.nmois16.value = "mai"}
+   if (form.nmois16.value == 6) {
+      form.nmois16.value = "juin"}
+   if (form.nmois16.value == 7) {
+      form.nmois16.value = "juillet"}
+   if (form.nmois16.value == 8) {
+      form.nmois16.value = "août"}
+   if (form.nmois16.value == 9) {
+      form.nmois16.value = "septembre"}
+   if (form.nmois16.value == 10) {
+      form.nmois16.value = "octobre"}
+   if (form.nmois16.value == 11) {
+      form.nmois16.value = "novembre"}
+   if (form.nmois16.value == 12) {
+      form.nmois16.value = "décembre"}
+}
+function conversionjourjulien16(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+112.5);
+   F = JD+112.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois17.value =  MM;
+    form.njour17.value   =  JJ;
+    form.nannee17.value  =  AA;
+   if (form.nmois17.value == 1) {
+      form.nmois17.value = "janvier"}
+   if (form.nmois17.value == 2) {
+      form.nmois17.value = "février"}
+   if (form.nmois17.value == 3) {
+      form.nmois17.value = "mars"}
+   if (form.nmois17.value == 4) {
+      form.nmois17.value = "avril"}
+   if (form.nmois17.value == 5) {
+      form.nmois17.value = "mai"}
+   if (form.nmois17.value == 6) {
+      form.nmois17.value = "juin"}
+   if (form.nmois17.value == 7) {
+      form.nmois17.value = "juillet"}
+   if (form.nmois17.value == 8) {
+      form.nmois17.value = "août"}
+   if (form.nmois17.value == 9) {
+      form.nmois17.value = "septembre"}
+   if (form.nmois17.value == 10) {
+      form.nmois17.value = "octobre"}
+   if (form.nmois17.value == 11) {
+      form.nmois17.value = "novembre"}
+   if (form.nmois17.value == 12) {
+      form.nmois17.value = "décembre"}
+}
+function conversionjourjulien17(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+119.5);
+   F = JD+119.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois18.value =  MM;
+    form.njour18.value   =  JJ;
+    form.nannee18.value  =  AA;
+   if (form.nmois18.value == 1) {
+      form.nmois18.value = "janvier"}
+   if (form.nmois18.value == 2) {
+      form.nmois18.value = "février"}
+   if (form.nmois18.value == 3) {
+      form.nmois18.value = "mars"}
+   if (form.nmois18.value == 4) {
+      form.nmois18.value = "avril"}
+   if (form.nmois18.value == 5) {
+      form.nmois18.value = "mai"}
+   if (form.nmois18.value == 6) {
+      form.nmois18.value = "juin"}
+   if (form.nmois18.value == 7) {
+      form.nmois18.value = "juillet"}
+   if (form.nmois18.value == 8) {
+      form.nmois18.value = "août"}
+   if (form.nmois18.value == 9) {
+      form.nmois18.value = "septembre"}
+   if (form.nmois18.value == 10) {
+      form.nmois18.value = "octobre"}
+   if (form.nmois18.value == 11) {
+      form.nmois18.value = "novembre"}
+   if (form.nmois18.value == 12) {
+      form.nmois18.value = "décembre"}
+}
+function conversionjourjulien18(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+126.5);
+   F = JD+126.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois19.value =  MM;
+    form.njour19.value   =  JJ;
+    form.nannee19.value  =  AA;
+   if (form.nmois19.value == 1) {
+      form.nmois19.value = "janvier"}
+   if (form.nmois19.value == 2) {
+      form.nmois19.value = "février"}
+   if (form.nmois19.value == 3) {
+      form.nmois19.value = "mars"}
+   if (form.nmois19.value == 4) {
+      form.nmois19.value = "avril"}
+   if (form.nmois19.value == 5) {
+      form.nmois19.value = "mai"}
+   if (form.nmois19.value == 6) {
+      form.nmois19.value = "juin"}
+   if (form.nmois19.value == 7) {
+      form.nmois19.value = "juillet"}
+   if (form.nmois19.value == 8) {
+      form.nmois19.value = "août"}
+   if (form.nmois19.value == 9) {
+      form.nmois19.value = "septembre"}
+   if (form.nmois19.value == 10) {
+      form.nmois19.value = "octobre"}
+   if (form.nmois19.value == 11) {
+      form.nmois19.value = "novembre"}
+   if (form.nmois19.value == 12) {
+      form.nmois19.value = "décembre"}
+}
+function conversionjourjulien19(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+133.5);
+   F = JD+133.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois20.value =  MM;
+    form.njour20.value   =  JJ;
+    form.nannee20.value  =  AA;
+   if (form.nmois20.value == 1) {
+      form.nmois20.value = "janvier"}
+   if (form.nmois20.value == 2) {
+      form.nmois20.value = "février"}
+   if (form.nmois20.value == 3) {
+      form.nmois20.value = "mars"}
+   if (form.nmois20.value == 4) {
+      form.nmois20.value = "avril"}
+   if (form.nmois20.value == 5) {
+      form.nmois20.value = "mai"}
+   if (form.nmois20.value == 6) {
+      form.nmois20.value = "juin"}
+   if (form.nmois20.value == 7) {
+      form.nmois20.value = "juillet"}
+   if (form.nmois20.value == 8) {
+      form.nmois20.value = "août"}
+   if (form.nmois20.value == 9) {
+      form.nmois20.value = "septembre"}
+   if (form.nmois20.value == 10) {
+      form.nmois20.value = "octobre"}
+   if (form.nmois20.value == 11) {
+      form.nmois20.value = "novembre"}
+   if (form.nmois20.value == 12) {
+      form.nmois20.value = "décembre"}
+}
+function conversionjourjulien20(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+140.5);
+   F = JD+140.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois21.value =  MM;
+    form.njour21.value   =  JJ;
+    form.nannee21.value  =  AA;
+   if (form.nmois21.value == 1) {
+      form.nmois21.value = "janvier"}
+   if (form.nmois21.value == 2) {
+      form.nmois21.value = "février"}
+   if (form.nmois21.value == 3) {
+      form.nmois21.value = "mars"}
+   if (form.nmois21.value == 4) {
+      form.nmois21.value = "avril"}
+   if (form.nmois21.value == 5) {
+      form.nmois21.value = "mai"}
+   if (form.nmois21.value == 6) {
+      form.nmois21.value = "juin"}
+   if (form.nmois21.value == 7) {
+      form.nmois21.value = "juillet"}
+   if (form.nmois21.value == 8) {
+      form.nmois21.value = "août"}
+   if (form.nmois21.value == 9) {
+      form.nmois21.value = "septembre"}
+   if (form.nmois21.value == 10) {
+      form.nmois21.value = "octobre"}
+   if (form.nmois21.value == 11) {
+      form.nmois21.value = "novembre"}
+   if (form.nmois21.value == 12) {
+      form.nmois21.value = "décembre"}
+}
+function conversionjourjulien21(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+147.5);
+   F = JD+147.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois22.value =  MM;
+    form.njour22.value   =  JJ;
+    form.nannee22.value  =  AA;
+   if (form.nmois22.value == 1) {
+      form.nmois22.value = "janvier"}
+   if (form.nmois22.value == 2) {
+      form.nmois22.value = "février"}
+   if (form.nmois22.value == 3) {
+      form.nmois22.value = "mars"}
+   if (form.nmois22.value == 4) {
+      form.nmois22.value = "avril"}
+   if (form.nmois22.value == 5) {
+      form.nmois22.value = "mai"}
+   if (form.nmois22.value == 6) {
+      form.nmois22.value = "juin"}
+   if (form.nmois22.value == 7) {
+      form.nmois22.value = "juillet"}
+   if (form.nmois22.value == 8) {
+      form.nmois22.value = "août"}
+   if (form.nmois22.value == 9) {
+      form.nmois22.value = "septembre"}
+   if (form.nmois22.value == 10) {
+      form.nmois22.value = "octobre"}
+   if (form.nmois22.value == 11) {
+      form.nmois22.value = "novembre"}
+   if (form.nmois22.value == 12) {
+      form.nmois22.value = "décembre"}
+}
+function conversionjourjulien22(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+154.5);
+   F = JD+154.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois23.value =  MM;
+    form.njour23.value   =  JJ;
+    form.nannee23.value  =  AA;
+   if (form.nmois23.value == 1) {
+      form.nmois23.value = "janvier"}
+   if (form.nmois23.value == 2) {
+      form.nmois23.value = "février"}
+   if (form.nmois23.value == 3) {
+      form.nmois23.value = "mars"}
+   if (form.nmois23.value == 4) {
+      form.nmois23.value = "avril"}
+   if (form.nmois23.value == 5) {
+      form.nmois23.value = "mai"}
+   if (form.nmois23.value == 6) {
+      form.nmois23.value = "juin"}
+   if (form.nmois23.value == 7) {
+      form.nmois23.value = "juillet"}
+   if (form.nmois23.value == 8) {
+      form.nmois23.value = "août"}
+   if (form.nmois23.value == 9) {
+      form.nmois23.value = "septembre"}
+   if (form.nmois23.value == 10) {
+      form.nmois23.value = "octobre"}
+   if (form.nmois23.value == 11) {
+      form.nmois23.value = "novembre"}
+   if (form.nmois23.value == 12) {
+      form.nmois23.value = "décembre"}
+}
+function conversionjourjulien23(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+161.5);
+   F = JD+161.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois24.value =  MM;
+    form.njour24.value   =  JJ;
+    form.nannee24.value  =  AA;
+   if (form.nmois24.value == 1) {
+      form.nmois24.value = "janvier"}
+   if (form.nmois24.value == 2) {
+      form.nmois24.value = "février"}
+   if (form.nmois24.value == 3) {
+      form.nmois24.value = "mars"}
+   if (form.nmois24.value == 4) {
+      form.nmois24.value = "avril"}
+   if (form.nmois24.value == 5) {
+      form.nmois24.value = "mai"}
+   if (form.nmois24.value == 6) {
+      form.nmois24.value = "juin"}
+   if (form.nmois24.value == 7) {
+      form.nmois24.value = "juillet"}
+   if (form.nmois24.value == 8) {
+      form.nmois24.value = "août"}
+   if (form.nmois24.value == 9) {
+      form.nmois24.value = "septembre"}
+   if (form.nmois24.value == 10) {
+      form.nmois24.value = "octobre"}
+   if (form.nmois24.value == 11) {
+      form.nmois24.value = "novembre"}
+   if (form.nmois24.value == 12) {
+      form.nmois24.value = "décembre"}
+}
+function conversionjourjulien24(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+168.5);
+   F = JD+168.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois25.value =  MM;
+    form.njour25.value   =  JJ;
+    form.nannee25.value  =  AA;
+   if (form.nmois25.value == 1) {
+      form.nmois25.value = "janvier"}
+   if (form.nmois25.value == 2) {
+      form.nmois25.value = "février"}
+   if (form.nmois25.value == 3) {
+      form.nmois25.value = "mars"}
+   if (form.nmois25.value == 4) {
+      form.nmois25.value = "avril"}
+   if (form.nmois25.value == 5) {
+      form.nmois25.value = "mai"}
+   if (form.nmois25.value == 6) {
+      form.nmois25.value = "juin"}
+   if (form.nmois25.value == 7) {
+      form.nmois25.value = "juillet"}
+   if (form.nmois25.value == 8) {
+      form.nmois25.value = "août"}
+   if (form.nmois25.value == 9) {
+      form.nmois25.value = "septembre"}
+   if (form.nmois25.value == 10) {
+      form.nmois25.value = "octobre"}
+   if (form.nmois25.value == 11) {
+      form.nmois25.value = "novembre"}
+   if (form.nmois25.value == 12) {
+      form.nmois25.value = "décembre"}
+}
+function conversionjourjulien25(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+175.5);
+   F = JD+175.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois26.value =  MM;
+    form.njour26.value   =  JJ;
+    form.nannee26.value  =  AA;
+   if (form.nmois26.value == 1) {
+      form.nmois26.value = "janvier"}
+   if (form.nmois26.value == 2) {
+      form.nmois26.value = "février"}
+   if (form.nmois26.value == 3) {
+      form.nmois26.value = "mars"}
+   if (form.nmois26.value == 4) {
+      form.nmois26.value = "avril"}
+   if (form.nmois26.value == 5) {
+      form.nmois26.value = "mai"}
+   if (form.nmois26.value == 6) {
+      form.nmois26.value = "juin"}
+   if (form.nmois26.value == 7) {
+      form.nmois26.value = "juillet"}
+   if (form.nmois26.value == 8) {
+      form.nmois26.value = "août"}
+   if (form.nmois26.value == 9) {
+      form.nmois26.value = "septembre"}
+   if (form.nmois26.value == 10) {
+      form.nmois26.value = "octobre"}
+   if (form.nmois26.value == 11) {
+      form.nmois26.value = "novembre"}
+   if (form.nmois26.value == 12) {
+      form.nmois26.value = "décembre"}
+}
+function conversionjourjulien26(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+182.5);
+   F = JD+182.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois27.value =  MM;
+    form.njour27.value   =  JJ;
+    form.nannee27.value  =  AA;
+   if (form.nmois27.value == 1) {
+      form.nmois27.value = "janvier"}
+   if (form.nmois27.value == 2) {
+      form.nmois27.value = "février"}
+   if (form.nmois27.value == 3) {
+      form.nmois27.value = "mars"}
+   if (form.nmois27.value == 4) {
+      form.nmois27.value = "avril"}
+   if (form.nmois27.value == 5) {
+      form.nmois27.value = "mai"}
+   if (form.nmois27.value == 6) {
+      form.nmois27.value = "juin"}
+   if (form.nmois27.value == 7) {
+      form.nmois27.value = "juillet"}
+   if (form.nmois27.value == 8) {
+      form.nmois27.value = "août"}
+   if (form.nmois27.value == 9) {
+      form.nmois27.value = "septembre"}
+   if (form.nmois27.value == 10) {
+      form.nmois27.value = "octobre"}
+   if (form.nmois27.value == 11) {
+      form.nmois27.value = "novembre"}
+   if (form.nmois27.value == 12) {
+      form.nmois27.value = "décembre"}
+}
+function conversionjourjulien27(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+189.5);
+   F = JD+189.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois28.value =  MM;
+    form.njour28.value   =  JJ;
+    form.nannee28.value  =  AA;
+   if (form.nmois28.value == 1) {
+      form.nmois28.value = "janvier"}
+   if (form.nmois28.value == 2) {
+      form.nmois28.value = "février"}
+   if (form.nmois28.value == 3) {
+      form.nmois28.value = "mars"}
+   if (form.nmois28.value == 4) {
+      form.nmois28.value = "avril"}
+   if (form.nmois28.value == 5) {
+      form.nmois28.value = "mai"}
+   if (form.nmois28.value == 6) {
+      form.nmois28.value = "juin"}
+   if (form.nmois28.value == 7) {
+      form.nmois28.value = "juillet"}
+   if (form.nmois28.value == 8) {
+      form.nmois28.value = "août"}
+   if (form.nmois28.value == 9) {
+      form.nmois28.value = "septembre"}
+   if (form.nmois28.value == 10) {
+      form.nmois28.value = "octobre"}
+   if (form.nmois28.value == 11) {
+      form.nmois28.value = "novembre"}
+   if (form.nmois28.value == 12) {
+      form.nmois28.value = "décembre"}
+}
+function conversionjourjulien28(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+196.5);
+   F = JD+196.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois29.value =  MM;
+    form.njour29.value   =  JJ;
+    form.nannee29.value  =  AA;
+   if (form.nmois29.value == 1) {
+      form.nmois29.value = "janvier"}
+   if (form.nmois29.value == 2) {
+      form.nmois29.value = "février"}
+   if (form.nmois29.value == 3) {
+      form.nmois29.value = "mars"}
+   if (form.nmois29.value == 4) {
+      form.nmois29.value = "avril"}
+   if (form.nmois29.value == 5) {
+      form.nmois29.value = "mai"}
+   if (form.nmois29.value == 6) {
+      form.nmois29.value = "juin"}
+   if (form.nmois29.value == 7) {
+      form.nmois29.value = "juillet"}
+   if (form.nmois29.value == 8) {
+      form.nmois29.value = "août"}
+   if (form.nmois29.value == 9) {
+      form.nmois29.value = "septembre"}
+   if (form.nmois29.value == 10) {
+      form.nmois29.value = "octobre"}
+   if (form.nmois29.value == 11) {
+      form.nmois29.value = "novembre"}
+   if (form.nmois29.value == 12) {
+      form.nmois29.value = "décembre"}
+}
+function conversionjourjulien29(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+203.5);
+   F = JD+203.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois30.value =  MM;
+    form.njour30.value   =  JJ;
+    form.nannee30.value  =  AA;
+   if (form.nmois30.value == 1) {
+      form.nmois30.value = "janvier"}
+   if (form.nmois30.value == 2) {
+      form.nmois30.value = "février"}
+   if (form.nmois30.value == 3) {
+      form.nmois30.value = "mars"}
+   if (form.nmois30.value == 4) {
+      form.nmois30.value = "avril"}
+   if (form.nmois30.value == 5) {
+      form.nmois30.value = "mai"}
+   if (form.nmois30.value == 6) {
+      form.nmois30.value = "juin"}
+   if (form.nmois30.value == 7) {
+      form.nmois30.value = "juillet"}
+   if (form.nmois30.value == 8) {
+      form.nmois30.value = "août"}
+   if (form.nmois30.value == 9) {
+      form.nmois30.value = "septembre"}
+   if (form.nmois30.value == 10) {
+      form.nmois30.value = "octobre"}
+   if (form.nmois30.value == 11) {
+      form.nmois30.value = "novembre"}
+   if (form.nmois30.value == 12) {
+      form.nmois30.value = "décembre"}
+}
+function conversionjourjulien30(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+210.5);
+   F = JD+210.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois31.value =  MM;
+    form.njour31.value   =  JJ;
+    form.nannee31.value  =  AA;
+   if (form.nmois31.value == 1) {
+      form.nmois31.value = "janvier"}
+   if (form.nmois31.value == 2) {
+      form.nmois31.value = "février"}
+   if (form.nmois31.value == 3) {
+      form.nmois31.value = "mars"}
+   if (form.nmois31.value == 4) {
+      form.nmois31.value = "avril"}
+   if (form.nmois31.value == 5) {
+      form.nmois31.value = "mai"}
+   if (form.nmois31.value == 6) {
+      form.nmois31.value = "juin"}
+   if (form.nmois31.value == 7) {
+      form.nmois31.value = "juillet"}
+   if (form.nmois31.value == 8) {
+      form.nmois31.value = "août"}
+   if (form.nmois31.value == 9) {
+      form.nmois31.value = "septembre"}
+   if (form.nmois31.value == 10) {
+      form.nmois31.value = "octobre"}
+   if (form.nmois31.value == 11) {
+      form.nmois31.value = "novembre"}
+   if (form.nmois31.value == 12) {
+      form.nmois31.value = "décembre"}
+}
+function conversionjourjulien31(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+217.5);
+   F = JD+217.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois32.value =  MM;
+    form.njour32.value   =  JJ;
+    form.nannee32.value  =  AA;
+   if (form.nmois32.value == 1) {
+      form.nmois32.value = "janvier"}
+   if (form.nmois32.value == 2) {
+      form.nmois32.value = "février"}
+   if (form.nmois32.value == 3) {
+      form.nmois32.value = "mars"}
+   if (form.nmois32.value == 4) {
+      form.nmois32.value = "avril"}
+   if (form.nmois32.value == 5) {
+      form.nmois32.value = "mai"}
+   if (form.nmois32.value == 6) {
+      form.nmois32.value = "juin"}
+   if (form.nmois32.value == 7) {
+      form.nmois32.value = "juillet"}
+   if (form.nmois32.value == 8) {
+      form.nmois32.value = "août"}
+   if (form.nmois32.value == 9) {
+      form.nmois32.value = "septembre"}
+   if (form.nmois32.value == 10) {
+      form.nmois32.value = "octobre"}
+   if (form.nmois32.value == 11) {
+      form.nmois32.value = "novembre"}
+   if (form.nmois32.value == 12) {
+      form.nmois32.value = "décembre"}
+}
+function conversionjourjulien32(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+224.5);
+   F = JD+224.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+
+    form.nmois33.value =  MM;
+    form.njour33.value   =  JJ;
+    form.nannee33.value  =  AA;
+   if (form.nmois33.value == 1) {
+      form.nmois33.value = "janvier"}
+   if (form.nmois33.value == 2) {
+      form.nmois33.value = "février"}
+   if (form.nmois33.value == 3) {
+      form.nmois33.value = "mars"}
+   if (form.nmois33.value == 4) {
+      form.nmois33.value = "avril"}
+   if (form.nmois33.value == 5) {
+      form.nmois33.value = "mai"}
+   if (form.nmois33.value == 6) {
+      form.nmois33.value = "juin"}
+   if (form.nmois33.value == 7) {
+      form.nmois33.value = "juillet"}
+   if (form.nmois33.value == 8) {
+      form.nmois33.value = "août"}
+   if (form.nmois33.value == 9) {
+      form.nmois33.value = "septembre"}
+   if (form.nmois33.value == 10) {
+      form.nmois33.value = "octobre"}
+   if (form.nmois33.value == 11) {
+      form.nmois33.value = "novembre"}
+   if (form.nmois33.value == 12) {
+      form.nmois33.value = "décembre"}
+}
+function conversionjourjulien33(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+231.5);
+   F = JD+231.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois34.value =  MM;
+    form.njour34.value   =  JJ;
+    form.nannee34.value  =  AA;
+   if (form.nmois34.value == 1) {
+      form.nmois34.value = "janvier"}
+   if (form.nmois34.value == 2) {
+      form.nmois34.value = "février"}
+   if (form.nmois34.value == 3) {
+      form.nmois34.value = "mars"}
+   if (form.nmois34.value == 4) {
+      form.nmois34.value = "avril"}
+   if (form.nmois34.value == 5) {
+      form.nmois34.value = "mai"}
+   if (form.nmois34.value == 6) {
+      form.nmois34.value = "juin"}
+   if (form.nmois34.value == 7) {
+      form.nmois34.value = "juillet"}
+   if (form.nmois34.value == 8) {
+      form.nmois34.value = "août"}
+   if (form.nmois34.value == 9) {
+      form.nmois34.value = "septembre"}
+   if (form.nmois34.value == 10) {
+      form.nmois34.value = "octobre"}
+   if (form.nmois34.value == 11) {
+      form.nmois34.value = "novembre"}
+   if (form.nmois34.value == 12) {
+      form.nmois34.value = "décembre"}
+}
+function conversionjourjulien34(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+238.5);
+   F = JD+238.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois35.value =  MM;
+    form.njour35.value   =  JJ;
+    form.nannee35.value  =  AA;
+   if (form.nmois35.value == 1) {
+      form.nmois35.value = "janvier"}
+   if (form.nmois35.value == 2) {
+      form.nmois35.value = "février"}
+   if (form.nmois35.value == 3) {
+      form.nmois35.value = "mars"}
+   if (form.nmois35.value == 4) {
+      form.nmois35.value = "avril"}
+   if (form.nmois35.value == 5) {
+      form.nmois35.value = "mai"}
+   if (form.nmois35.value == 6) {
+      form.nmois35.value = "juin"}
+   if (form.nmois35.value == 7) {
+      form.nmois35.value = "juillet"}
+   if (form.nmois35.value == 8) {
+      form.nmois35.value = "août"}
+   if (form.nmois35.value == 9) {
+      form.nmois35.value = "septembre"}
+   if (form.nmois35.value == 10) {
+      form.nmois35.value = "octobre"}
+   if (form.nmois35.value == 11) {
+      form.nmois35.value = "novembre"}
+   if (form.nmois35.value == 12) {
+      form.nmois35.value = "décembre"}
+}
+function conversionjourjulien35(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+245.5);
+   F = JD+245.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois36.value =  MM;
+    form.njour36.value   =  JJ;
+    form.nannee36.value  =  AA;
+   if (form.nmois36.value == 1) {
+      form.nmois36.value = "janvier"}
+   if (form.nmois36.value == 2) {
+      form.nmois36.value = "février"}
+   if (form.nmois36.value == 3) {
+      form.nmois36.value = "mars"}
+   if (form.nmois36.value == 4) {
+      form.nmois36.value = "avril"}
+   if (form.nmois36.value == 5) {
+      form.nmois36.value = "mai"}
+   if (form.nmois36.value == 6) {
+      form.nmois36.value = "juin"}
+   if (form.nmois36.value == 7) {
+      form.nmois36.value = "juillet"}
+   if (form.nmois36.value == 8) {
+      form.nmois36.value = "août"}
+   if (form.nmois36.value == 9) {
+      form.nmois36.value = "septembre"}
+   if (form.nmois36.value == 10) {
+      form.nmois36.value = "octobre"}
+   if (form.nmois36.value == 11) {
+      form.nmois36.value = "novembre"}
+   if (form.nmois36.value == 12) {
+      form.nmois36.value = "décembre"}
+}
+function conversionjourjulien36(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+252.5);
+   F = JD+252.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois37.value =  MM;
+    form.njour37.value   =  JJ;
+    form.nannee37.value  =  AA;
+   if (form.nmois37.value == 1) {
+      form.nmois37.value = "janvier"}
+   if (form.nmois37.value == 2) {
+      form.nmois37.value = "février"}
+   if (form.nmois37.value == 3) {
+      form.nmois37.value = "mars"}
+   if (form.nmois37.value == 4) {
+      form.nmois37.value = "avril"}
+   if (form.nmois37.value == 5) {
+      form.nmois37.value = "mai"}
+   if (form.nmois37.value == 6) {
+      form.nmois37.value = "juin"}
+   if (form.nmois37.value == 7) {
+      form.nmois37.value = "juillet"}
+   if (form.nmois37.value == 8) {
+      form.nmois37.value = "août"}
+   if (form.nmois37.value == 9) {
+      form.nmois37.value = "septembre"}
+   if (form.nmois37.value == 10) {
+      form.nmois37.value = "octobre"}
+   if (form.nmois37.value == 11) {
+      form.nmois37.value = "novembre"}
+   if (form.nmois37.value == 12) {
+      form.nmois37.value = "décembre"}
+}
+function conversionjourjulien37(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+259.5);
+   F = JD+259.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois38.value =  MM;
+    form.njour38.value   =  JJ;
+    form.nannee38.value  =  AA;
+   if (form.nmois38.value == 1) {
+      form.nmois38.value = "janvier"}
+   if (form.nmois38.value == 2) {
+      form.nmois38.value = "février"}
+   if (form.nmois38.value == 3) {
+      form.nmois38.value = "mars"}
+   if (form.nmois38.value == 4) {
+      form.nmois38.value = "avril"}
+   if (form.nmois38.value == 5) {
+      form.nmois38.value = "mai"}
+   if (form.nmois38.value == 6) {
+      form.nmois38.value = "juin"}
+   if (form.nmois38.value == 7) {
+      form.nmois38.value = "juillet"}
+   if (form.nmois38.value == 8) {
+      form.nmois38.value = "août"}
+   if (form.nmois38.value == 9) {
+      form.nmois38.value = "septembre"}
+   if (form.nmois38.value == 10) {
+      form.nmois38.value = "octobre"}
+   if (form.nmois38.value == 11) {
+      form.nmois38.value = "novembre"}
+   if (form.nmois38.value == 12) {
+      form.nmois38.value = "décembre"}
+}
+function conversionjourjulien38(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+266.5);
+   F = JD+266.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois39.value =  MM;
+    form.njour39.value   =  JJ;
+    form.nannee39.value  =  AA;
+   if (form.nmois39.value == 1) {
+      form.nmois39.value = "janvier"}
+   if (form.nmois39.value == 2) {
+      form.nmois39.value = "février"}
+   if (form.nmois39.value == 3) {
+      form.nmois39.value = "mars"}
+   if (form.nmois39.value == 4) {
+      form.nmois39.value = "avril"}
+   if (form.nmois39.value == 5) {
+      form.nmois39.value = "mai"}
+   if (form.nmois39.value == 6) {
+      form.nmois39.value = "juin"}
+   if (form.nmois39.value == 7) {
+      form.nmois39.value = "juillet"}
+   if (form.nmois39.value == 8) {
+      form.nmois39.value = "août"}
+   if (form.nmois39.value == 9) {
+      form.nmois39.value = "septembre"}
+   if (form.nmois39.value == 10) {
+      form.nmois39.value = "octobre"}
+   if (form.nmois39.value == 11) {
+      form.nmois39.value = "novembre"}
+   if (form.nmois39.value == 12) {
+      form.nmois39.value = "décembre"}
+}
+function conversionjourjulien39(form) {
+   JD== ""
+   with (Math) {  
+   Z = floor(JD+273.5);
+   F = JD+273.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJ = floor(RJ);
+   if (T < 13.5) {
+      MM = T - 1
+   } else
+   { if (T > 13.5)  MM = T - 13 
+   } 
+   if (MM > 2.5) {
+      AA = C - 4716 } else
+   { if (MM < 2.5) AA = C - 4715
+   }
+   }
+    form.nmois40.value =  MM;
+    form.njour40.value   =  JJ;
+    form.nannee40.value  =  AA;
+   if (form.nmois40.value == 1) {
+      form.nmois40.value = "janvier"}
+   if (form.nmois40.value == 2) {
+      form.nmois40.value = "février"}
+   if (form.nmois40.value == 3) {
+      form.nmois40.value = "mars"}
+   if (form.nmois40.value == 4) {
+      form.nmois40.value = "avril"}
+   if (form.nmois40.value == 5) {
+      form.nmois40.value = "mai"}
+   if (form.nmois40.value == 6) {
+      form.nmois40.value = "juin"}
+   if (form.nmois40.value == 7) {
+      form.nmois40.value = "juillet"}
+   if (form.nmois40.value == 8) {
+      form.nmois40.value = "août"}
+   if (form.nmois40.value == 9) {
+      form.nmois40.value = "septembre"}
+   if (form.nmois40.value == 10) {
+      form.nmois40.value = "octobre"}
+   if (form.nmois40.value == 11) {
+      form.nmois40.value = "novembre"}
+   if (form.nmois40.value == 12) {
+      form.nmois40.value = "décembre"}
+}
+function calculjourjulienT9(form) {
+    MMT9= eval(form.nmois.value) + 9 ;
+    DDT9= eval(form.njour.value) + 0;
+   if ((form.nmois.value == 5) || (form.nmois.value == 7) || (form.nmois.value == 12)) {
+      DDT9 = eval(form.njour.value) + 1;}
+    YYT9= eval(form.nannee.value)+ 0;
+    with (Math) {  
+      GGGT9 = 1;
+      if( YYT9 < 1582 ) GGGT9 = 0;
+      if( YYT9 <= 1582 && MMT9 < 10 ) GGGT9 = 0;
+      if( YYT9 <= 1582 && MMT9 == 10 && DDT9 < 5 ) GGGT9 = 0;
+      JDT9 = -1 * floor(7 * (floor((MMT9 + 9) / 12) + YYT9) / 4);
+      ST9 = 1;
+      if ((MMT9 - 9)<0) ST9=-1;
+      AT9 = abs(MMT9 - 9);
+      J1T9 = floor(YYT9 + ST9 * floor(AT9 / 7));
+      J1T9 = -1 * floor((floor(J1T9 / 100) + 1) * 3 / 4);
+      JDT9 = JDT9 + floor(275 * MMT9 / 9) + DDT9 + (GGGT9 * J1T9);
+      JDT9 = JDT9 + 1721027 + 2 * GGGT9 + 367 * YYT9 - 0.5;
+	  K1 = (JDT9 + 1.5);
+	  K2 = (K1/7);
+	  K3 = K2 - floor(K2);
+	  JST9 = round(K3*7 + 0.000000000317);
+	  }  
+	  form.jsemaineterme.value = JST9   
+   if (form.jsemaineterme.value == 0) {
+      form.jsemaineterme.value = "dimanche"} else
+   if (form.jsemaineterme.value == 1) {
+      form.jsemaineterme.value = "lundi"} else
+   if (form.jsemaineterme.value == 2) {
+      form.jsemaineterme.value = "mardi"} else
+   if (form.jsemaineterme.value == 3) {
+      form.jsemaineterme.value = "mercredi"} else
+   if (form.jsemaineterme.value == 4) {
+      form.jsemaineterme.value = "jeudi"} else
+   if (form.jsemaineterme.value == 5) {
+      form.jsemaineterme.value = "vendredi"} else
+   if (form.jsemaineterme.value == 6) {
+      form.jsemaineterme.value = "samedi"}
+}
+function conversionjourjulienT9(form) {
+   JDT9== ""
+   with (Math) {  
+   Z = floor(JDT9+0.5);
+   F = JDT9+0.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT9 = floor(RJ);
+   if (T < 13.5) {
+      MMT9 = T - 1
+   } else
+   { if (T > 13.5)  MMT9 = T - 13 
+   } 
+   if (MMT9 > 2.5) {
+      AAT9 = C - 4716 } else
+   { if (MMT9 < 2.5) AAT9 = C - 4715
+   }
+   }
+    form.nmoisT9.value =  MMT9;
+    form.njourT9.value   =  JJT9;
+    form.nanneeT9.value  =  AAT9;
+    form.nmoisT92.value =  MMT9;
+    form.njourT92.value   =  JJT9;
+    form.nanneeT92.value  =  AAT9;
+   if (form.nmoisT9.value == 1) {
+      form.nmoisT9.value = "janvier"}
+   if (form.nmoisT92.value == 1) {
+      form.nmoisT92.value = "janvier"}
+   if (form.nmoisT9.value == 2) {
+      form.nmoisT9.value = "février"}
+   if (form.nmoisT92.value == 2) {
+      form.nmoisT92.value = "février"}
+   if (form.nmoisT9.value == 3) {
+      form.nmoisT9.value = "mars"}
+   if (form.nmoisT92.value == 3) {
+      form.nmoisT92.value = "mars"}
+   if (form.nmoisT9.value == 4) {
+      form.nmoisT9.value = "avril"}
+   if (form.nmoisT92.value == 4) {
+      form.nmoisT92.value = "avril"}
+   if (form.nmoisT9.value == 5) {
+      form.nmoisT9.value = "mai"}
+   if (form.nmoisT92.value == 5) {
+      form.nmoisT92.value = "mai"}
+   if (form.nmoisT9.value == 6) {
+      form.nmoisT9.value = "juin"}
+   if (form.nmoisT92.value == 6) {
+      form.nmoisT92.value = "juin"}
+   if (form.nmoisT9.value == 7) {
+      form.nmoisT9.value = "juillet"}
+   if (form.nmoisT92.value == 7) {
+      form.nmoisT92.value = "juillet"}
+   if (form.nmoisT9.value == 8) {
+      form.nmoisT9.value = "août"}
+   if (form.nmoisT92.value == 8) {
+      form.nmoisT92.value = "août"}
+   if (form.nmoisT9.value == 9) {
+      form.nmoisT9.value = "septembre"}
+   if (form.nmoisT92.value == 9) {
+      form.nmoisT92.value = "septembre"}
+   if (form.nmoisT9.value == 10) {
+      form.nmoisT9.value = "octobre"}
+   if (form.nmoisT92.value == 10) {
+      form.nmoisT92.value = "octobre"}
+   if (form.nmoisT9.value == 11) {
+      form.nmoisT9.value = "novembre"}
+   if (form.nmoisT92.value == 11) {
+      form.nmoisT92.value = "novembre"}
+   if (form.nmoisT9.value == 12) {
+      form.nmoisT9.value = "décembre"}
+   if (form.nmoisT92.value == 12) {
+      form.nmoisT92.value = "décembre"}
+}
+function conversionjourjulienT9conge1(form) {
+   JDT9== ""
+   with (Math) {  
+   Z = floor(JDT9+0.5-42);
+   F = JDT9+0.5 - 42 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT9 = floor(RJ);
+   if (T < 13.5) {
+      MMT9 = T - 1
+   } else
+   { if (T > 13.5)  MMT9 = T - 13 
+   } 
+   if (MMT9 > 2.5) {
+      AAT9 = C - 4716 } else
+   { if (MMT9 < 2.5) AAT9 = C - 4715
+   }
+   }
+    form.nmoisconge1.value =  MMT9;
+    form.njourconge1.value   =  JJT9;
+    form.nanneeconge1.value  =  AAT9;   
+}
+function conversionjourjulienT9conge1p(form) {
+   JDT9== ""
+   with (Math) {  
+   Z = floor(JDT9+0.5+70);
+   F = JDT9+0.5 + 70 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT9 = floor(RJ);
+   if (T < 13.5) {
+      MMT9 = T - 1
+   } else
+   { if (T > 13.5)  MMT9 = T - 13 
+   } 
+   if (MMT9 > 2.5) {
+      AAT9 = C - 4716 } else
+   { if (MMT9 < 2.5) AAT9 = C - 4715
+   }
+   }
+    form.nmoisconge1p.value =  MMT9;
+    form.njourconge1p.value   =  JJT9;
+    form.nanneeconge1p.value  =  AAT9;   
+}
+function conversionjourjulienT9conge2(form) {
+   JDT9== ""
+   with (Math) {  
+   Z = floor(JDT9+0.5-56);
+   F = JDT9+0.5 - 56 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT9 = floor(RJ);
+   if (T < 13.5) {
+      MMT9 = T - 1
+   } else
+   { if (T > 13.5)  MMT9 = T - 13 
+   } 
+   if (MMT9 > 2.5) {
+      AAT9 = C - 4716 } else
+   { if (MMT9 < 2.5) AAT9 = C - 4715
+   }
+   }
+    form.nmoisconge2.value =  MMT9;
+    form.njourconge2.value   =  JJT9;
+    form.nanneeconge2.value  =  AAT9;
+}
+function conversionjourjulienT9conge2p(form) {
+   JDT9== ""
+   with (Math) {  
+   Z = floor(JDT9+0.5+126);
+   F = JDT9+0.5 + 126 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT9 = floor(RJ);
+   if (T < 13.5) {
+      MMT9 = T - 1
+   } else
+   { if (T > 13.5)  MMT9 = T - 13 
+   } 
+   if (MMT9 > 2.5) {
+      AAT9 = C - 4716 } else
+   { if (MMT9 < 2.5) AAT9 = C - 4715
+   }
+   }
+    form.nmoisconge2p.value =  MMT9;
+    form.njourconge2p.value   =  JJT9;
+    form.nanneeconge2p.value  =  AAT9;
+}
+function conversionjourjulienT9conge3(form) {
+   JDT9== ""
+   with (Math) {  
+   Z = floor(JDT9+0.5-84);
+   F = JDT9+0.5 - 84 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT9 = floor(RJ);
+   if (T < 13.5) {
+      MMT9 = T - 1
+   } else
+   { if (T > 13.5)  MMT9 = T - 13 
+   } 
+   if (MMT9 > 2.5) {
+      AAT9 = C - 4716 } else
+   { if (MMT9 < 2.5) AAT9 = C - 4715
+   }
+   }
+    form.nmoisconge3.value =  MMT9;
+    form.njourconge3.value   =  JJT9;
+    form.nanneeconge3.value  =  AAT9;
+}
+function conversionjourjulienT9conge3p(form) {
+   JDT9== ""
+   with (Math) {  
+   Z = floor(JDT9+0.5+154);
+   F = JDT9+0.5 + 154 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT9 = floor(RJ);
+   if (T < 13.5) {
+      MMT9 = T - 1
+   } else
+   { if (T > 13.5)  MMT9 = T - 13 
+   } 
+   if (MMT9 > 2.5) {
+      AAT9 = C - 4716 } else
+   { if (MMT9 < 2.5) AAT9 = C - 4715
+   }
+   }
+    form.nmoisconge3p.value =  MMT9;
+    form.njourconge3p.value   =  JJT9;
+    form.nanneeconge3p.value  =  AAT9;
+}
+function conversionjourjulienT9conge4(form) {
+   JDT9== ""
+   with (Math) {  
+   Z = floor(JDT9+0.5-168);
+   F = JDT9+0.5 - 168 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT9 = floor(RJ);
+   if (T < 13.5) {
+      MMT9 = T - 1
+   } else
+   { if (T > 13.5)  MMT9 = T - 13 
+   } 
+   if (MMT9 > 2.5) {
+      AAT9 = C - 4716 } else
+   { if (MMT9 < 2.5) AAT9 = C - 4715
+   }
+   }
+    form.nmoisconge4.value =  MMT9;
+    form.njourconge4.value   =  JJT9;
+    form.nanneeconge4.value  =  AAT9;
+}
+function conversionjourjulienT9conge4p(form) {
+   JDT9== ""
+   with (Math) {  
+   Z = floor(JDT9+0.5+154);
+   F = JDT9+0.5 + 154 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT9 = floor(RJ);
+   if (T < 13.5) {
+      MMT9 = T - 1
+   } else
+   { if (T > 13.5)  MMT9 = T - 13 
+   } 
+   if (MMT9 > 2.5) {
+      AAT9 = C - 4716 } else
+   { if (MMT9 < 2.5) AAT9 = C - 4715
+   }
+   }
+    form.nmoisconge4p.value =  MMT9;
+    form.njourconge4p.value   =  JJT9;
+    form.nanneeconge4p.value  =  AAT9;
+}
+function calculjourjulienT8(form) {
+    MMT8= eval(form.nmois.value) + 8 ;
+    DDT8= eval(form.njour.value) + 0;   
+	if ((form.nmois.value == 6) || (form.nmois.value == 8)) {
+    DDT8 = eval(form.njour.value) + 1;}
+    YYT8= eval(form.nannee.value)+ 0;
+    with (Math) {  
+      GGGT8 = 1;
+      if( YYT8 < 1582 ) GGGT8 = 0;
+      if( YYT8 <= 1582 && MMT8 < 10 ) GGGT8 = 0;
+      if( YYT8 <= 1582 && MMT8 == 10 && DDT8 < 5 ) GGGT8 = 0;
+      JDT8 = -1 * floor(7 * (floor((MMT8 + 9) / 12) + YYT8) / 4);
+      ST8 = 1;
+      if ((MMT8 - 9)<0) ST8=-1;
+      AT8 = abs(MMT8 - 9);
+      J1T8 = floor(YYT8 + ST8 * floor(AT8 / 7));
+      J1T8 = -1 * floor((floor(J1T8 / 100) + 1) * 3 / 4);
+      JDT8 = JDT8 + floor(275 * MMT8 / 9) + DDT8 + (GGGT8 * J1T8);
+      JDT8 = JDT8 + 1721027 + 2 * GGGT8 + 367 * YYT8 - 0.5;
+	  }
+}
+
+function conversionjourjulienT8(form) {
+   JDT8== ""
+   with (Math) {  
+   Z = floor(JDT8+0.5);
+   F = JDT8+0.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT8 = floor(RJ);
+   if (T < 13.5) {
+      MMT8 = T - 1
+   } else
+   { if (T > 13.5)  MMT8 = T - 13 
+   } 
+   if (MMT8 > 2.5) {
+      AAT8 = C - 4716 } else
+   { if (MMT8 < 2.5) AAT8 = C - 4715
+   }
+   }
+    form.nmoisT8.value =  MMT8;
+    form.njourT8.value   =  JJT8;
+    form.nanneeT8.value  =  AAT8;
+   if (form.nmoisT8.value == 1) {
+      form.nmoisT8.value = "janvier"}
+   if (form.nmoisT8.value == 2) {
+      form.nmoisT8.value = "février"}
+   if (form.nmoisT8.value == 3) {
+      form.nmoisT8.value = "mars"}
+   if (form.nmoisT8.value == 4) {
+      form.nmoisT8.value = "avril"}
+   if (form.nmoisT8.value == 5) {
+      form.nmoisT8.value = "mai"}
+   if (form.nmoisT8.value == 6) {
+      form.nmoisT8.value = "juin"}
+   if (form.nmoisT8.value == 7) {
+      form.nmoisT8.value = "juillet"}
+   if (form.nmoisT8.value == 8) {
+      form.nmoisT8.value = "août"}
+   if (form.nmoisT8.value == 9) {
+      form.nmoisT8.value = "septembre"}
+   if (form.nmoisT8.value == 10) {
+      form.nmoisT8.value = "octobre"}
+   if (form.nmoisT8.value == 11) {
+      form.nmoisT8.value = "novembre"}
+   if (form.nmoisT8.value == 12) {
+      form.nmoisT8.value = "décembre"}
+}
+function calculjourjulienT7(form) {
+    MMT7= eval(form.nmois.value) + 7 ;
+    DDT7= eval(form.njour.value) + 0;
+    if ((form.nmois.value == 7) || (form.nmois.value == 9)) {
+    DDT7 = eval(form.njour.value) + 1;}
+    YYT7= eval(form.nannee.value)+ 0;
+    with (Math) {  
+      GGGT7 = 1;
+      if( YYT7 < 1582 ) GGGT7 = 0;
+      if( YYT7 <= 1582 && MMT7 < 10 ) GGGT7 = 0;
+      if( YYT7 <= 1582 && MMT7 == 10 && DDT7 < 5 ) GGGT7 = 0;
+      JDT7 = -1 * floor(7 * (floor((MMT7 + 9) / 12) + YYT7) / 4);
+      ST7 = 1;
+      if ((MMT7 - 9)<0) ST7=-1;
+      AT7 = abs(MMT7 - 9);
+      J1T7 = floor(YYT7 + ST7 * floor(AT7 / 7));
+      J1T7 = -1 * floor((floor(J1T7 / 100) + 1) * 3 / 4);
+      JDT7 = JDT7 + floor(275 * MMT7 / 9) + DDT7 + (GGGT7 * J1T7);
+      JDT7 = JDT7 + 1721027 + 2 * GGGT7 + 367 * YYT7 - 0.5;
+	  }
+}
+
+function conversionjourjulienT7(form) {
+   JDT7== ""
+   with (Math) {  
+   Z = floor(JDT7+0.5);
+   F = JDT7+0.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT7 = floor(RJ);
+   if (T < 13.5) {
+      MMT7 = T - 1
+   } else
+   { if (T > 13.5)  MMT7 = T - 13 
+   } 
+   if (MMT7 > 2.5) {
+      AAT7 = C - 4716 } else
+   { if (MMT7 < 2.5) AAT7 = C - 4715
+   }
+   }
+    form.nmoisT7.value =  MMT7;
+    form.njourT7.value   =  JJT7;
+    form.nanneeT7.value  =  AAT7;
+   if (form.nmoisT7.value == 1) {
+      form.nmoisT7.value = "janvier"}
+   if (form.nmoisT7.value == 2) {
+      form.nmoisT7.value = "février"}
+   if (form.nmoisT7.value == 3) {
+      form.nmoisT7.value = "mars"}
+   if (form.nmoisT7.value == 4) {
+      form.nmoisT7.value = "avril"}
+   if (form.nmoisT7.value == 5) {
+      form.nmoisT7.value = "mai"}
+   if (form.nmoisT7.value == 6) {
+      form.nmoisT7.value = "juin"}
+   if (form.nmoisT7.value == 7) {
+      form.nmoisT7.value = "juillet"}
+   if (form.nmoisT7.value == 8) {
+      form.nmoisT7.value = "août"}
+   if (form.nmoisT7.value == 9) {
+      form.nmoisT7.value = "septembre"}
+   if (form.nmoisT7.value == 10) {
+      form.nmoisT7.value = "octobre"}
+   if (form.nmoisT7.value == 11) {
+      form.nmoisT7.value = "novembre"}
+   if (form.nmoisT7.value == 12) {
+      form.nmoisT7.value = "décembre"}
+}
+function calculjourjulienT6(form) {
+    MMT6= eval(form.nmois.value) + 6 ;
+    DDT6= eval(form.njour.value) + 0;
+    if ((form.nmois.value == 8) || (form.nmois.value == 10)) {
+    DDT6 = eval(form.njour.value) + 1;}
+    YYT6= eval(form.nannee.value)+ 0;
+    with (Math) {  
+      GGGT6 = 1;
+      if( YYT6 < 1582 ) GGGT6 = 0;
+      if( YYT6 <= 1582 && MMT6 < 10 ) GGGT6 = 0;
+      if( YYT6 <= 1582 && MMT6 == 10 && DDT6 < 5 ) GGGT6 = 0;
+      JDT6 = -1 * floor(7 * (floor((MMT6 + 9) / 12) + YYT6) / 4);
+      ST6 = 1;
+      if ((MMT6 - 9)<0) ST6=-1;
+      AT6 = abs(MMT6 - 9);
+      J1T6 = floor(YYT6 + ST6 * floor(AT6 / 7));
+      J1T6 = -1 * floor((floor(J1T6 / 100) + 1) * 3 / 4);
+      JDT6 = JDT6 + floor(275 * MMT6 / 9) + DDT6 + (GGGT6 * J1T6);
+      JDT6 = JDT6 + 1721027 + 2 * GGGT6 + 367 * YYT6 - 0.5;
+	  }
+}
+
+function conversionjourjulienT6(form) {
+   JDT6== ""
+   with (Math) {  
+   Z = floor(JDT6+0.5);
+   F = JDT6+0.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT6 = floor(RJ);
+   if (T < 13.5) {
+      MMT6 = T - 1
+   } else
+   { if (T > 13.5)  MMT6 = T - 13 
+   } 
+   if (MMT6 > 2.5) {
+      AAT6 = C - 4716 } else
+   { if (MMT6 < 2.5) AAT6 = C - 4715
+   }
+   }
+    form.nmoisT6.value =  MMT6;
+    form.njourT6.value   =  JJT6;
+    form.nanneeT6.value  =  AAT6;
+   if (form.nmoisT6.value == 1) {
+      form.nmoisT6.value = "janvier"}
+   if (form.nmoisT6.value == 2) {
+      form.nmoisT6.value = "février"}
+   if (form.nmoisT6.value == 3) {
+      form.nmoisT6.value = "mars"}
+   if (form.nmoisT6.value == 4) {
+      form.nmoisT6.value = "avril"}
+   if (form.nmoisT6.value == 5) {
+      form.nmoisT6.value = "mai"}
+   if (form.nmoisT6.value == 6) {
+      form.nmoisT6.value = "juin"}
+   if (form.nmoisT6.value == 7) {
+      form.nmoisT6.value = "juillet"}
+   if (form.nmoisT6.value == 8) {
+      form.nmoisT6.value = "août"}
+   if (form.nmoisT6.value == 9) {
+      form.nmoisT6.value = "septembre"}
+   if (form.nmoisT6.value == 10) {
+      form.nmoisT6.value = "octobre"}
+   if (form.nmoisT6.value == 11) {
+      form.nmoisT6.value = "novembre"}
+   if (form.nmoisT6.value == 12) {
+      form.nmoisT6.value = "décembre"}
+}
+function calculjourjulienT5(form) {
+    MMT5= eval(form.nmois.value) + 5 ;
+    DDT5= eval(form.njour.value) + 0;
+    if ((form.nmois.value == 9) || (form.nmois.value == 11)) {
+    DDT5 = eval(form.njour.value) + 1;}
+    YYT5= eval(form.nannee.value)+ 0;
+    with (Math) {  
+      GGGT5 = 1;
+      if( YYT5 < 1582 ) GGGT5 = 0;
+      if( YYT5 <= 1582 && MMT5 < 10 ) GGGT5 = 0;
+      if( YYT5 <= 1582 && MMT5 == 10 && DDT5 < 5 ) GGGT5 = 0;
+      JDT5 = -1 * floor(7 * (floor((MMT5 + 9) / 12) + YYT5) / 4);
+      ST5 = 1;
+      if ((MMT5 - 9)<0) ST5=-1;
+      AT5 = abs(MMT5 - 9);
+      J1T5 = floor(YYT5 + ST5 * floor(AT5 / 7));
+      J1T5 = -1 * floor((floor(J1T5 / 100) + 1) * 3 / 4);
+      JDT5 = JDT5 + floor(275 * MMT5 / 9) + DDT5 + (GGGT5 * J1T5);
+      JDT5 = JDT5 + 1721027 + 2 * GGGT5 + 367 * YYT5 - 0.5;
+	  }
+}
+function conversionjourjulienT5(form) {
+   JDT5== ""
+   with (Math) {  
+   Z = floor(JDT5+0.5);
+   F = JDT5+0.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT5 = floor(RJ);
+   if (T < 13.5) {
+      MMT5 = T - 1
+   } else
+   { if (T > 13.5)  MMT5 = T - 13 
+   } 
+   if (MMT5 > 2.5) {
+      AAT5 = C - 4716 } else
+   { if (MMT5 < 2.5) AAT5 = C - 4715
+   }
+   }
+    form.nmoisT5.value =  MMT5;
+    form.njourT5.value   =  JJT5;
+    form.nanneeT5.value  =  AAT5;
+   if (form.nmoisT5.value == 1) {
+      form.nmoisT5.value = "janvier"}
+   if (form.nmoisT5.value == 2) {
+      form.nmoisT5.value = "février"}
+   if (form.nmoisT5.value == 3) {
+      form.nmoisT5.value = "mars"}
+   if (form.nmoisT5.value == 4) {
+      form.nmoisT5.value = "avril"}
+   if (form.nmoisT5.value == 5) {
+      form.nmoisT5.value = "mai"}
+   if (form.nmoisT5.value == 6) {
+      form.nmoisT5.value = "juin"}
+   if (form.nmoisT5.value == 7) {
+      form.nmoisT5.value = "juillet"}
+   if (form.nmoisT5.value == 8) {
+      form.nmoisT5.value = "août"}
+   if (form.nmoisT5.value == 9) {
+      form.nmoisT5.value = "septembre"}
+   if (form.nmoisT5.value == 10) {
+      form.nmoisT5.value = "octobre"}
+   if (form.nmoisT5.value == 11) {
+
+      form.nmoisT5.value = "novembre"}
+   if (form.nmoisT5.value == 12) {
+      form.nmoisT5.value = "décembre"}
+}
+function calculjourjulienT4(form) {
+    MMT4= eval(form.nmois.value) + 4 ;
+    DDT4= eval(form.njour.value) + 0;
+    if ((form.nmois.value == 10) || (form.nmois.value == 12)) {
+    DDT4 = eval(form.njour.value) + 1;}
+    YYT4= eval(form.nannee.value)+ 0;
+    with (Math) {  
+      GGGT4 = 1;
+      if( YYT4 < 1582 ) GGGT4 = 0;
+      if( YYT4 <= 1582 && MMT4 < 10 ) GGGT4 = 0;
+      if( YYT4 <= 1582 && MMT4 == 10 && DDT4 < 5 ) GGGT4 = 0;
+      JDT4 = -1 * floor(7 * (floor((MMT4 + 9) / 12) + YYT4) / 4);
+      ST4 = 1;
+      if ((MMT4 - 9)<0) ST4=-1;
+      AT4 = abs(MMT4 - 9);
+      J1T4 = floor(YYT4 + ST4 * floor(AT4 / 7));
+      J1T4 = -1 * floor((floor(J1T4 / 100) + 1) * 3 / 4);
+      JDT4 = JDT4 + floor(275 * MMT4 / 9) + DDT4 + (GGGT4 * J1T4);
+      JDT4 = JDT4 + 1721027 + 2 * GGGT4 + 367 * YYT4 - 0.5;
+	  }
+}
+function conversionjourjulienT4(form) {
+   JDT4== ""
+   with (Math) {  
+   Z = floor(JDT4+0.5);
+   F = JDT4+0.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT4 = floor(RJ);
+   if (T < 13.5) {
+      MMT4 = T - 1
+   } else
+   { if (T > 13.5)  MMT4 = T - 13 
+   } 
+   if (MMT4 > 2.5) {
+      AAT4 = C - 4716 } else
+   { if (MMT4 < 2.5) AAT4 = C - 4715
+   }
+   }
+    form.nmoisT4.value =  MMT4;
+    form.njourT4.value   =  JJT4;
+    form.nanneeT4.value  =  AAT4;
+   if (form.nmoisT4.value == 1) {
+      form.nmoisT4.value = "janvier"}
+   if (form.nmoisT4.value == 2) {
+      form.nmoisT4.value = "février"}
+   if (form.nmoisT4.value == 3) {
+      form.nmoisT4.value = "mars"}
+   if (form.nmoisT4.value == 4) {
+      form.nmoisT4.value = "avril"}
+   if (form.nmoisT4.value == 5) {
+      form.nmoisT4.value = "mai"}
+   if (form.nmoisT4.value == 6) {
+      form.nmoisT4.value = "juin"}
+   if (form.nmoisT4.value == 7) {
+      form.nmoisT4.value = "juillet"}
+   if (form.nmoisT4.value == 8) {
+      form.nmoisT4.value = "août"}
+   if (form.nmoisT4.value == 9) {
+      form.nmoisT4.value = "septembre"}
+   if (form.nmoisT4.value == 10) {
+      form.nmoisT4.value = "octobre"}
+   if (form.nmoisT4.value == 11) {
+      form.nmoisT4.value = "novembre"}
+   if (form.nmoisT4.value == 12) {
+      form.nmoisT4.value = "décembre"}
+}
+function calculjourjulienT3(form) {
+    MMT3= eval(form.nmois.value) + 3 ;
+    DDT3= eval(form.njour.value) + 0;
+    if ((form.nmois.value == 11)) {
+    DDT3 = eval(form.njour.value) + 1;}
+    YYT3= eval(form.nannee.value)+ 0;
+    with (Math) {  
+      GGGT3 = 1;
+      if( YYT3 < 1582 ) GGGT3 = 0;
+      if( YYT3 <= 1582 && MMT3 < 10 ) GGGT3 = 0;
+      if( YYT3 <= 1582 && MMT3 == 10 && DDT3 < 5 ) GGGT3 = 0;
+      JDT3 = -1 * floor(7 * (floor((MMT3 + 9) / 12) + YYT3) / 4);
+      ST3 = 1;
+      if ((MMT3 - 9)<0) ST3=-1;
+      AT3 = abs(MMT3 - 9);
+      J1T3 = floor(YYT3 + ST3 * floor(AT3 / 7));
+      J1T3 = -1 * floor((floor(J1T3 / 100) + 1) * 3 / 4);
+      JDT3 = JDT3 + floor(275 * MMT3 / 9) + DDT3 + (GGGT3 * J1T3);
+      JDT3 = JDT3 + 1721027 + 2 * GGGT3 + 367 * YYT3 - 0.5;
+	  }
+}
+function conversionjourjulienT3(form) {
+   JDT3== ""
+   with (Math) {  
+   Z = floor(JDT3+0.5);
+   F = JDT3+0.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT3 = floor(RJ);
+   if (T < 13.5) {
+      MMT3 = T - 1
+   } else
+   { if (T > 13.5)  MMT3 = T - 13 
+   } 
+   if (MMT3 > 2.5) {
+      AAT3 = C - 4716 } else
+   { if (MMT3 < 2.5) AAT3 = C - 4715
+   }
+   }
+    form.nmoisT3.value =  MMT3;
+    form.njourT3.value   =  JJT3;
+    form.nanneeT3.value  =  AAT3;
+   if (form.nmoisT3.value == 1) {
+      form.nmoisT3.value = "janvier"}
+   if (form.nmoisT3.value == 2) {
+      form.nmoisT3.value = "février"}
+   if (form.nmoisT3.value == 3) {
+      form.nmoisT3.value = "mars"}
+   if (form.nmoisT3.value == 4) {
+      form.nmoisT3.value = "avril"}
+   if (form.nmoisT3.value == 5) {
+      form.nmoisT3.value = "mai"}
+   if (form.nmoisT3.value == 6) {
+      form.nmoisT3.value = "juin"}
+   if (form.nmoisT3.value == 7) {
+      form.nmoisT3.value = "juillet"}
+   if (form.nmoisT3.value == 8) {
+      form.nmoisT3.value = "août"}
+   if (form.nmoisT3.value == 9) {
+      form.nmoisT3.value = "septembre"}
+   if (form.nmoisT3.value == 10) {
+      form.nmoisT3.value = "octobre"}
+   if (form.nmoisT3.value == 11) {
+      form.nmoisT3.value = "novembre"}
+   if (form.nmoisT3.value == 12) {
+      form.nmoisT3.value = "décembre"}
+}
+function calculjourjulienT2(form) {
+    MMT2= eval(form.nmois.value) + 2 ;
+    DDT2= eval(form.njour.value) + 0;
+    if ((form.nmois.value == 12)) {
+    DDT2 = eval(form.njour.value) + 1;}
+    YYT2= eval(form.nannee.value)+ 0;
+    with (Math) {  
+      GGGT2 = 1;
+      if( YYT2 < 1582 ) GGGT2 = 0;
+      if( YYT2 <= 1582 && MMT2 < 10 ) GGGT2 = 0;
+      if( YYT2 <= 1582 && MMT2 == 10 && DDT2 < 5 ) GGGT2 = 0;
+      JDT2 = -1 * floor(7 * (floor((MMT2 + 9) / 12) + YYT2) / 4);
+      ST2 = 1;
+      if ((MMT2 - 9)<0) ST2=-1;
+      AT2 = abs(MMT2 - 9);
+      J1T2 = floor(YYT2 + ST2 * floor(AT2 / 7));
+      J1T2 = -1 * floor((floor(J1T2 / 100) + 1) * 3 / 4);
+      JDT2 = JDT2 + floor(275 * MMT2 / 9) + DDT2 + (GGGT2 * J1T2);
+      JDT2 = JDT2 + 1721027 + 2 * GGGT2 + 367 * YYT2 - 0.5;
+	  }
+}
+function conversionjourjulienT2(form) {
+   JDT2== ""
+   with (Math) {  
+   Z = floor(JDT2+0.5);
+   F = JDT2+0.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT2 = floor(RJ);
+   if (T < 13.5) {
+      MMT2 = T - 1
+   } else
+   { if (T > 13.5)  MMT2 = T - 13 
+   } 
+   if (MMT2 > 2.5) {
+      AAT2 = C - 4716 } else
+   { if (MMT2 < 2.5) AAT2 = C - 4715
+   }
+   }
+    form.nmoisT2.value =  MMT2;
+    form.njourT2.value   =  JJT2;
+    form.nanneeT2.value  =  AAT2;
+   if (form.nmoisT2.value == 1) {
+      form.nmoisT2.value = "janvier"}
+   if (form.nmoisT2.value == 2) {
+      form.nmoisT2.value = "février"}
+   if (form.nmoisT2.value == 3) {
+      form.nmoisT2.value = "mars"}
+   if (form.nmoisT2.value == 4) {
+      form.nmoisT2.value = "avril"}
+   if (form.nmoisT2.value == 5) {
+      form.nmoisT2.value = "mai"}
+   if (form.nmoisT2.value == 6) {
+      form.nmoisT2.value = "juin"}
+   if (form.nmoisT2.value == 7) {
+      form.nmoisT2.value = "juillet"}
+   if (form.nmoisT2.value == 8) {
+      form.nmoisT2.value = "août"}
+   if (form.nmoisT2.value == 9) {
+      form.nmoisT2.value = "septembre"}
+   if (form.nmoisT2.value == 10) {
+      form.nmoisT2.value = "octobre"}
+   if (form.nmoisT2.value == 11) {
+      form.nmoisT2.value = "novembre"}
+   if (form.nmoisT2.value == 12) {
+      form.nmoisT2.value = "décembre"}
+}
+function calculjourjulienT1(form) {
+    MMT1= eval(form.nmois.value) + 1 ;
+    DDT1= eval(form.njour.value) + 0;
+    YYT1= eval(form.nannee.value)+ 0;
+    with (Math) {  
+      GGGT1 = 1;
+      if( YYT1 < 1582 ) GGGT1 = 0;
+      if( YYT1 <= 1582 && MMT1 < 10 ) GGGT1 = 0;
+      if( YYT1 <= 1582 && MMT1 == 10 && DDT1 < 5 ) GGGT1 = 0;
+      JDT1 = -1 * floor(7 * (floor((MMT1 + 9) / 12) + YYT1) / 4);
+      ST1 = 1;
+      if ((MMT1 - 9)<0) ST1=-1;
+      AT1 = abs(MMT1 - 9);
+      J1T1 = floor(YYT3 + ST3 * floor(AT3 / 7));
+      J1T1 = -1 * floor((floor(J1T1 / 100) + 1) * 3 / 4);
+      JDT1 = JDT1 + floor(275 * MMT1 / 9) + DDT1 + (GGGT1 * J1T1);
+      JDT1 = JDT1 + 1721027 + 2 * GGGT1 + 367 * YYT1 - 0.5;
+	  }
+}
+function conversionjourjulienT1(form) {
+   JDT1== ""
+   with (Math) {  
+   Z = floor(JDT1+0.5);
+   F = JDT1+0.5 - Z;
+   if (Z < 2299161) {
+      A = Z
+	} else
+      {I = floor((Z - 1867216.25)/36524.25);
+      A = Z + 1 + I - floor(I/4);
+    }
+   B = A + 1524;
+   C = floor((B - 122.1)/365.25);
+   D = floor(365.25 * C);
+   T = floor((B - D)/ 30.6001);
+   RJ = B - D - floor(30.6001 * T) + F;
+   JJT1 = floor(RJ);
+   if (T < 13.5) {
+      MMT1 = T - 1
+   } else
+   { if (T > 13.5)  MMT1 = T - 13 
+   } 
+   if (MMT1 > 2.5) {
+      AAT1 = C - 4716 } else
+   { if (MMT1 < 2.5) AAT1 = C - 4715
+   }
+   }
+    form.nmoisT1.value =  MMT1;
+    form.njourT1.value   =  JJT1;
+    form.nanneeT1.value  =  AAT1;
+   if (form.nmoisT1.value == 1) {
+      form.nmoisT1.value = "janvier"}
+   if (form.nmoisT1.value == 2) {
+      form.nmoisT1.value = "février"}
+   if (form.nmoisT1.value == 3) {
+      form.nmoisT1.value = "mars"}
+   if (form.nmoisT1.value == 4) {
+      form.nmoisT1.value = "avril"}
+   if (form.nmoisT1.value == 5) {
+      form.nmoisT1.value = "mai"}
+   if (form.nmoisT1.value == 6) {
+      form.nmoisT1.value = "juin"}
+   if (form.nmoisT1.value == 7) {
+      form.nmoisT1.value = "juillet"}
+   if (form.nmoisT1.value == 8) {
+      form.nmoisT1.value = "août"}
+   if (form.nmoisT1.value == 9) {
+      form.nmoisT1.value = "septembre"}
+   if (form.nmoisT1.value == 10) {
+      form.nmoisT1.value = "octobre"}
+   if (form.nmoisT1.value == 11) {
+      form.nmoisT1.value = "novembre"}
+   if (form.nmoisT1.value == 12) {
+      form.nmoisT1.value = "décembre"}
+}
+function Newdate(form) {
+	form.nmois.value = "";
+	form.njour.value = "";
+	form.nannee.value = "";
+	form.jsemaine.value = "";
+    form.nmoisT92.value = "";
+    form.njourT92.value = "";
+    form.nanneeT92.value = "";
+    form.jsemaineterme.value = "";
+	form.njour.focus();
+}	
+ <!-- Calendrier de grossesse créé par Dr Aly Abbara, http://www.aly-abbara.com -->
+ <!-- le fonctionnement du calendrier est assuré par les calculs du jour julien et ses conversions selon des formules extraites des publications de la société astronomique de France -->

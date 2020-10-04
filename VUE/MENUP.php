@@ -232,10 +232,10 @@ echo "</ul>";
 echo "</li>";
 echo "<li><a href=\"\" class=\"parent\"><span>"." La Date Du Jours  :".date("d-m-Y")."</span></a></li>"; 
 echo "<li><a href=\"\" class=\"parent\"><span>"." Vous etes Connecté  :<< ".$_SESSION["USER"]." >>"."</span></a></li>"; 
-$W=nbrtostring("gpts2012","wrs","IDWIL",$_SESSION["WILAYA"],"WILAYAS");
-echo "<li><a href=\"\" class=\"parent\"><span>"." WILAYA:  :<<  ".$W."   >>"."</span></a></li>"; 
-$C=nbrtostring("gpts2012","COM","IDCOM",$_SESSION["COMMUNE"],"COMMUNE");
-echo "<li><a href=\"\" class=\"parent\"><span>"." COMMUNE:  :<<  ".$C."   >>"."</span></a></li>"; 
+// $W=nbrtostring("gpts2012","wrs","IDWIL",$_SESSION["WILAYA"],"WILAYAS");
+// echo "<li><a href=\"\" class=\"parent\"><span>"." WILAYA:  :<<  ".$W."   >>"."</span></a></li>"; 
+// $C=nbrtostring("gpts2012","COM","IDCOM",$_SESSION["COMMUNE"],"COMMUNE");
+// echo "<li><a href=\"\" class=\"parent\"><span>"." COMMUNE:  :<<  ".$C."   >>"."</span></a></li>"; 
 echo "<li><a href=\"\" class=\"parent\"><span>"." SERVICE:  :<<  ".$_SESSION["SERVICE"]."   >>"."</span></a></li>"; 
 echo "<li><a href=\"index.php?uc=DECONNECTION\" class=\"parent\"><span>Deconnection</span></a></li>"; 
 ?>	

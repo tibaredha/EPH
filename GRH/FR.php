@@ -31,17 +31,7 @@ $ndp=$_GET["idp"];
 $pdf->Image('../images/photos/'.$ndp.'.jpg', $x='35', $y='5', $w=30, $h=35, $type='', $link='', $align='', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false, $hidden=false, $fitonpage=false, $alt=false, $altimgs=array());
 
 
-
-
 $pdf->titreFICHEREN($_GET["idp"]);
-
-
-
-
-
-
-
-
 $pdf->Output();
 
 ?>

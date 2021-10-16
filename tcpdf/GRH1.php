@@ -584,7 +584,7 @@ class GRH1 extends TCPDF
 	$this->Text(43,190,$result["Date_Premier_Recrutement"]);$this->Text(126,190,$result["DATEARRIVE"]);
 	if($result["rnvgradear"]==1 or $result["rnvgradear"]==3 )
 	{
-	$this->Text(88,180," في ".$this->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitear"));
+		$this->Text(88,180," في ".$this->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitear"));
 	}
 	$this->Text(43,160,$this->nbrtostring("grh","sfamiliale","idsfamiliale",$result["Situation_familliale"],"sfamilialear"));
     $this->Text(35,170,$result["NBRENF"]);
@@ -637,7 +637,7 @@ class GRH1 extends TCPDF
 	$this->Text(30,170,$this->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear"));
 	if($result["rnvgradear"]==1 or $result["rnvgradear"]==3 )
 	{
-	$this->Text(88,170,"في ".$this->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitear"));
+		$this->Text(88,170,"في ".$this->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitear"));
 	}
 	$this->Text(26,180,$result["DATEARRIVE"]);
 	$this->Text(120,180,"("."تاريخ ال".$this->nbrtostring("grh","causedepart","idcausedepart",$result["Motif_Cessation"],"causedepartar").")");

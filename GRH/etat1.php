@@ -51,7 +51,7 @@ mysql_query("SET NAMES 'UTF8' ");
 $colone=$_POST['idp'];
 $query_liste = "SELECT * FROM regcong WHERE idp=$idp";
 $requete = mysql_query( $query_liste, $cnx ) or die( "ERREUR MYSQL num곯: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
-$totalmbr1=mysql_num_rows($requete);
+$totalmbr1= mysql_num_rows($requete);
 //***************************************************************************************************************************************//
 while($row=mysql_fetch_object($requete))
   {

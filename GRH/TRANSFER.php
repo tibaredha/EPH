@@ -24,7 +24,7 @@ $per ->hide(595,$x+90,'idg',20,$result->idg);
 $per ->hide(595,$x+90,'idstatut',20,$result->idstatut); 
 $per ->hide(595,$x+90,'idp',20,$_GET["idp"]); 
 $per ->label(850,$x+195,'المصلحة الجديدة*');    $per ->combo(430,$x+195,'SERVICE','grh','service','المصلحة الجديدة','data','0','2'); 
-$per ->label(300,$x+195,'ابتداء من*');        $per ->txtar(100,$x+195,'APARTIR',20,"");  
+$per ->label(300,$x+195,'ابتداء من*');          $per ->txtar(100,$x+195,'APARTIR',20,"");  
 $per ->url(90+790+210,250,"index.php?uc=LGRH1&idp=".$_GET["idp"]."&Nomlatin=".$result->Nomarab."&Prenom_Latin=".$result->Prenom_Arabe."&Sexe=".$result->Sexe,"ادارة المستخدم","2");    
 }
 $per ->f1();

@@ -19,7 +19,7 @@ $per ->label(925,$x+30,'التاريخ');                 $per ->txtar(720+20,$x
 $per ->label(630,$x+30,'ساعة الطلب');              $per ->txtar(470-40,$x+30,'HEUR',20,date("H:i"));
 $per ->label(930,$x+60,'الرتبة');                  $per ->txtar(470-40,$x+60,'GRADE',72,$result->gradear); 
 $per ->label(330,$x+60,'الوظيفة');                 $per ->txtar(80-40,$x+60,'FONCTION',40,""); 
-$per ->label(928,$x+90,'المدة*');                   $per ->txtar(720+20,$x+90,'DUREE',10,"0"); //$per ->combov(720+20,$x+90,'DUREE',array("03 أيام", "15 أيام", "21 أيام", "30 يوم"))   ; 
+$per ->label(928,$x+90,'المدة*');                  $per ->txtar(720+20,$x+90,'DUREE',10,"0"); //$per ->combov(720+20,$x+90,'DUREE',array("03 أيام", "15 أيام", "21 أيام", "30 يوم"))   ; 
 $per ->label(595,$x+90,'تاريخ بداية العطلة*');     $per ->datetime(470-40,$x+90,'DC');   
 $per ->label(918,$x+142,'السبب');             
 $per ->combo(520,$x+142,'CC','grh','causeconge','','data','0','1'); 

@@ -17,7 +17,7 @@ $per ->label(665,$x,'*الاسم');                  $per ->txtar(470-40,$x,'PRE
 $per ->label(925,$x+30,'التاريخ');             $per ->txtar(720+20,$x+30,'DATE',20,date("Y-m-d"));
 $per ->label(630,$x+30,'ساعة الطلب');          $per ->txtar(470-40,$x+30,'HEUR',20,date("H:i"));
 $per ->label(930,$x+60,'الرتبة');              $per ->txtar(470-40,$x+60,'GRADE',72,$result->gradear); 
-$per ->label(910,$x+90,'المصلحة');              $per ->txtar(430,$x+90,'SERVICE',72,$result->service); 
+$per ->label(910,$x+90,'المصلحة');             $per ->txtar(430,$x+90,'SERVICE',72,$result->service); 
 $per ->label(885,$x+142,'تاريخ الذهاب ');      $per ->txtar(720,$x+138,'datecessation',20,$result->Date_Cessation);            
 $per ->label(620,$x+142,' سبب الذهاب');        $per ->combo(430,$x+142,'motifcessation','grh','causedepart','',"WILAYAN",'0','1');          
 $per ->hide(595,$x+90,'Sexe',20,$result->Sexe); 

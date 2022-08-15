@@ -1592,16 +1592,16 @@ switch($def_mois)
     }
 	function combo($x,$y,$name,$db_name,$tb_name,$choisir,$class,$ve,$va) 
 	{
-	$this-> mysqlconnect();
-	echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 
-	echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
-	echo"<option   value=\"1\" selected=\"selected\">".$choisir."</option>"."\n";
-    $result = mysql_query("SELECT * FROM $tb_name" );
-    while($data =  mysql_fetch_array($result))
-    {
-    echo '<option value="'.$data[$ve].'">'.$data[$va].'</option>';
-    }
-	echo '</select>'."\n"; 
+		$this-> mysqlconnect();
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+		echo"<option   value=\"1\" selected=\"selected\">".$choisir."</option>"."\n";
+		$result = mysql_query("SELECT * FROM $tb_name" );
+		while($data =  mysql_fetch_array($result))
+		{
+		echo '<option value="'.$data[$ve].'">'.$data[$va].'</option>';
+		}
+		echo '</select>'."\n"; 
 	echo "</div>";
 	}
 	//*****************************************************************************//

@@ -8,8 +8,7 @@ $idstatut=$_POST["idstatut"];
 $idp=$_POST["idp"];
 // $cause=$_POST["DATECONTA"];
 $pdf->SetFont('aefurat','', 20);
-$pdf->SetXY(15,70);
-$pdf->Cell(180,8,"مقـرر علاوات و تعويضات و منح ",0,1,'C');
+$pdf->SetXY(15,70);$pdf->Cell(180,8,"مقـرر علاوات و تعويضات و منح ",0,1,'C');
 $pdf->SetFont('aefurat', '', 15);
 
 $pdf->SetXY(15,80);

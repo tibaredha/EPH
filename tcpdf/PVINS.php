@@ -144,7 +144,7 @@ class PVINS extends TCPDF
          $this->SetXY(70,80);
          $this->Cell(65,15,'محضر تنصيب',1,1,'C');
 	     $this->SetFont('aefurat', '', 18);
-		 $this->Text(10,110,$this->DATEPV($DATEINS)." قمنا نحن ");
+		 $this->Text(10,110," قمنا نحن ");//$this->DATEPV($DATEINS).
 		 $this->Text(5,120," السيد(ة) ".$directeur." مديـر المؤسسة العمومية الإستشفائية  بعين وسارة  بتنصيب ");
 		 $this->Text(65,140," السيد(ة):  ".$NOM.'  '.$PRENOM);
 		 $this->Text(38,160,$this->nbrtostring("grh","grade","idg",$GRADE,"gradear"));//

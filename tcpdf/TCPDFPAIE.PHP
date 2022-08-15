@@ -30,36 +30,25 @@ class TCPDFPAIE extends TCPDF
 	
 	
 	
-	 function titre1($CNASAT,$ccp,$JOURS,$NOMAR,$PRENOMAR,$DATNSC,$SF,$GRADE,$cat,$ech,$ENFS)
+	function titre1($CNASAT,$ccp,$JOURS,$NOMAR,$PRENOMAR,$DATNSC,$SF,$GRADE,$cat,$ech,$ENFS)
     {
          $this->SetFont('aefurat', '', 14);
          $this->Text(146,40,$CNASAT);
          $this->Text(167,30,$ccp);
          $date1=date("Y-m");	
-         $this->SetXY(5,89);
-         $this->Cell(30,8,'لشهر'.':'.$date1,1,1,'C');
-		 $this->SetXY(173,89);
-         $this->Cell(35,8,'عدد ايام العمل'.":".$JOURS,1,1,'C');
-		 $this->SetXY(5,100);
-         $this->Cell(100,8,'اللقب و الاسم'."  :".$NOMAR."  ".$PRENOMAR,1,1,'R');
-		 $this->SetXY(105,100);
-		 $this->Cell(50,8,'تاريخ الميلاد'.":".$DATNSC,1,1,'C');
-		 $this->SetXY(173,100);
-		 $this->Cell(35,8,'الحالة العائلية'.":".$SF,1,1,'C');
+         $this->SetXY(5,89);$this->Cell(30,8,'لشهر'.':'.$date1,1,1,'C');
+		 $this->SetXY(173,89);$this->Cell(35,8,'عدد ايام العمل'.":".$JOURS,1,1,'C');
+		 $this->SetXY(5,100);$this->Cell(100,8,'اللقب و الاسم'."  :".$NOMAR."  ".$PRENOMAR,1,1,'R');
+		 $this->SetXY(105,100);$this->Cell(50,8,'تاريخ الميلاد'.":".$DATNSC,1,1,'C');
+		 $this->SetXY(173,100);$this->Cell(35,8,'الحالة العائلية'.":".$SF,1,1,'C');
 		 $this->SetFont('aefurat', '', 12);
-		 $this->SetXY(5,108);
-		 $this->Cell(100,8,'الرتبة'." :".$GRADE,1,1,'R');
+         $this->SetXY(5,108);$this->Cell(100,8,'الرتبة'." :".$GRADE,1,1,'R');
 		 $this->SetFont('aefurat', '', 14);
-		 $this->SetXY(105,108);
-		 $this->Cell(25,8,'الصنف'.":".$cat,1,1,'C');
-		 $this->SetXY(130,108);
-		 $this->Cell(25,8,'الدرجة'.":".$ech,1,1,'C');
-		 $this->SetXY(156.5,100);
-		 $this->Cell(15,8,'م عالي',1,1,'C');
-		 $this->SetXY(156.5,108);
-		 $this->Cell(15,8,'***',1,1,'C');
-		 $this->SetXY(173,108);
-		 $this->Cell(35,8,'عدد الاولاد'.":".$ENFS,1,1,'C');
+		 $this->SetXY(105,108);$this->Cell(25,8,'الصنف'.":".$cat,1,1,'C');
+		 $this->SetXY(130,108);$this->Cell(25,8,'الدرجة'.":".$ech,1,1,'C');
+		 $this->SetXY(156.5,100);$this->Cell(15,8,'م عالي',1,1,'C');
+		 $this->SetXY(156.5,108);$this->Cell(15,8,'***',1,1,'C');
+		 $this->SetXY(173,108);$this->Cell(35,8,'عدد الاولاد'.":".$ENFS,1,1,'C');
 		 $this->SetXY(05,120);$this->Cell(60,8,'التعويضات والمنح',1,1,'C');
 		 $this->SetXY(65,120);$this->Cell(40,8,'المبلغ',1,1,'C');
 		 $this->Rect(105, 130, 100, 110 ,"d");
@@ -153,13 +142,12 @@ class TCPDFPAIE extends TCPDF
 			}
 			$this->Text(5,185,"منح عائلية");
 			$this->Text(80,185,$ALLOCF*$ENFS);
-			
-			
-			
 			//*************************************************//
 			$TOTAL=$SBRUT+($ALLOCF*$ENFS);
 			$this->Text(5,190,"المجموع");
 			$this->Text(80,190,round($TOTAL,2));
+			
+			
 			//*************************************************//
 			$RSS=($SBRUT*9)/100;
 			$this->Text(5,195,"الضمان الاجتماعى");
@@ -313,9 +301,9 @@ class TCPDFPAIE extends TCPDF
     {
 		$this->SetFont('aefurat', '', 14);
 		$this->Text(5,130,"الاجر القاعدى");            $this->Text(80,130,$sb);
-        $this->Text(5,135,"تعويض الخبرة المهنية");       $this->Text(80,135,$iep);
+        $this->Text(5,135,"تعويض الخبرة المهنية");    $this->Text(80,135,$iep);
 		$this->Text(5,140,"منحة جزافية تعويضية");     $this->Text(80,140,$IFC);
-		$this->Text(5,145,"زيادة استدلالية منصب عالى"); $this->Text(80,145,$ps); 
+		$this->Text(5,145,"زيادة استدلالية منصب عالى");$this->Text(80,145,$ps); 
 		$this->Text(5,150,"التعويض عن العدوى");       $this->Text(80,150,$CONT);
 	}		
 	 function tab2($uc,$sb,$iep,$IFC) 
